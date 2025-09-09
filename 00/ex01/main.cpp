@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/09 21:27:45 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/09 22:07:12 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int executeCommand(Command cmd)
 	{
 	case ADD:
 		std::cout << "You chose to ADD a contact.\n";
+		addContact();
 		break;
 	case SEARCH:
 		std::cout << "You chose to SEARCH for a contact.\n";
@@ -38,7 +39,7 @@ static int executeCommand(Command cmd)
 		std::cout << "Exiting the program...\n";
 		return (0);
 	case INVALID:
-		std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT only.\n\n" << RESET;
+		std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
 		break;
 	}
 	return (1);
