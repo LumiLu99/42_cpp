@@ -25,12 +25,12 @@ NAME = phonebook
 SRC_DIR = src
 
 # Compiler & flags
-CC = clang++
+CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf
 
 # Source files
-SRC = phonebook.cpp
+SRC = main.cpp
 
 # Build rules
 all: $(NAME)

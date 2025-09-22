@@ -25,7 +25,7 @@ NAME = megaphone
 SRC_DIR = src
 
 # Compiler & flags
-CC = clang++
+CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98 #-fsanitize=thread
 RM = rm -rf
 

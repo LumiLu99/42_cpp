@@ -6,11 +6,11 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/09 22:07:12 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/16 15:19:10 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pb.hpp"
+#include "main.hpp"
 
 static Command convertCmd(const std::string &input)
 {
@@ -28,19 +28,19 @@ static int executeCommand(Command cmd)
 {
 	switch (cmd)
 	{
-	case ADD:
-		std::cout << "You chose to ADD a contact.\n";
-		addContact();
-		break;
-	case SEARCH:
-		std::cout << "You chose to SEARCH for a contact.\n";
-		break;
-	case EXIT:
-		std::cout << "Exiting the program...\n";
-		return (0);
-	case INVALID:
-		std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
-		break;
+		case ADD:
+			std::cout << "You chose to ADD a contact.\n";
+			// addContact();
+			break;
+		case SEARCH:
+			std::cout << "You chose to SEARCH for a contact.\n";
+			break;
+		case EXIT:
+			std::cout << "Exiting the program...\n";
+			return (0);
+		case INVALID:
+			std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
+			break;
 	}
 	return (1);
 }
@@ -63,7 +63,8 @@ int main()
 		std::cout << YELLOW << " Type your commands in UPPERCASE words only!\n" << RESET;
 		std::cout << "\n";
 		std::cout << BOLD << " Please enter your choice: " << RESET;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+			exit (EXIT_SUCCESS);
 		if (input.empty())
 		{
 			std::cout << RED << "Input cannot be empty. Please enter a valid command.\n\n" << RESET;
