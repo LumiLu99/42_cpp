@@ -6,11 +6,12 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/16 15:19:10 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/22 15:05:59 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.hpp"
+#include "PhoneBook.hpp"
 
 static Command convertCmd(const std::string &input)
 {
@@ -30,7 +31,7 @@ static int executeCommand(Command cmd)
 	{
 		case ADD:
 			std::cout << "You chose to ADD a contact.\n";
-			// addContact();
+			addContact();
 			break;
 		case SEARCH:
 			std::cout << "You chose to SEARCH for a contact.\n";

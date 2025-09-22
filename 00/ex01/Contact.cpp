@@ -1,31 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 21:44:49 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/22 16:27:23 by yelu             ###   ########.fr       */
+/*   Created: 2025/09/22 15:09:04 by yelu              #+#    #+#             */
+/*   Updated: 2025/09/22 15:09:10 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-#define CONTACT_HPP
-
-#include <string>
-
-class Contact
-{
-	private:
-		std::string _FirstName;
-		std::string _LastName;
-		std::string _Nickname;
-		std::string _PhoneNumber;
-		std::string _DarkestSecret;
-	
-	public:
-		void setName();
-};
-
-#endif
