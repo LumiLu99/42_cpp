@@ -10,3 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "main.hpp"
+
+class Contact
+{
+    private:     // Access specifier
+        std::string FirstName;
+        std::string LastName;
+        std::string Nickname;
+        std::string PhoneNumber;
+        std::string DarkestSecret;
+};
+
