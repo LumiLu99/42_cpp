@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:06:27 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 16:03:18 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 17:39:08 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void PhoneBook::addContact()
 	std::string input;
 	const std::string field[5] = 
 	{
-		"first name",
+		"First Name",
 		"Last Name",
 		"Nickname",
 		"Phone Number",
@@ -56,14 +56,22 @@ void PhoneBook::addContact()
 	}
 	if (_count < 8)
 	{
+		std::cout << "contact[" << _count << "] "; 
 		_contact[_count] = c;
 		_count++;
 	}
 	else
 	{
-		_contact[_count % 8] = c;
+		_count = _count % 8;
+		_contact[_count] = c;
+		std::cout << "contact[" << _count << "] ";
 		_count++;
 	}
 	std::cout << GREEN << "Contact \"" << c.getFirstName() << "\" saved.\n" << RESET;
 	return ;
+}
+
+void PhoneBook::searchContact()
+{
+	
 }

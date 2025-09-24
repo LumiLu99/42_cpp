@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:27:56 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/08 16:27:01 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 16:36:13 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 			{
 				std::cout << (char)std::toupper(argv[i][j]);
 			}
-			if (i < argc -1)
+			if (i < argc - 1)
 				std::cout << " ";
 		}
 		std::cout << "\n";
@@ -32,4 +32,3 @@ int main(int argc, char **argv)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
 	return (0);
 }
-

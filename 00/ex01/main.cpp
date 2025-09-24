@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 16:03:13 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 16:42:45 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int executeCommand(Command cmd, PhoneBook &pb)
 			break;
 		case SEARCH:
 			std::cout << "You chose to SEARCH for a contact.\n";
+			pb.searchContact();
 			break;
 		case EXIT:
 			std::cout << RED << "Exiting the program...\n" << RESET;
@@ -84,4 +85,5 @@ int main()
 			status = executeCommand(convertCmd(input), pb);
 		}
 	}
+	return (0);
 }

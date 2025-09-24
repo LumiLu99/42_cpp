@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:45:21 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 15:30:24 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 16:25:30 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class PhoneBook
 			_count = 0;
 		}
 		void addContact();
+		void searchContact();
 };
 
 #endif
