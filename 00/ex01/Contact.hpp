@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:44:49 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/22 16:27:23 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 13:50:44 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CONTACT_HPP
 
 #include <string>
+#include <iostream>
 
 class Contact
 {
@@ -25,7 +26,9 @@ class Contact
 		std::string _DarkestSecret;
 	
 	public:
-		void setName();
+		void setFirstName(std::string name);
+
+		const std::string& getFirstName() const;
 };
 
 #endif
