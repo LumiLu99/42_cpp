@@ -6,11 +6,13 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/09 22:07:12 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 16:42:45 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pb.hpp"
+#include "main.hpp"
+#include "PhoneBook.hpp"
+#include "Contact.hpp"
 
 static Command convertCmd(const std::string &input)
 {
@@ -24,29 +26,32 @@ static Command convertCmd(const std::string &input)
 		return (INVALID);
 }
 
-static int executeCommand(Command cmd)
+
+static int executeCommand(Command cmd, PhoneBook &pb)
 {
 	switch (cmd)
 	{
-	case ADD:
-		std::cout << "You chose to ADD a contact.\n";
-		addContact();
-		break;
-	case SEARCH:
-		std::cout << "You chose to SEARCH for a contact.\n";
-		break;
-	case EXIT:
-		std::cout << "Exiting the program...\n";
-		return (0);
-	case INVALID:
-		std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
-		break;
+		case ADD:
+			std::cout << "You chose to ADD a contact.\n";
+			pb.addContact();
+			break;
+		case SEARCH:
+			std::cout << "You chose to SEARCH for a contact.\n";
+			pb.searchContact();
+			break;
+		case EXIT:
+			std::cout << RED << "Exiting the program...\n" << RESET;
+			return (0);
+		case INVALID:
+			std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
+			break;
 	}
 	return (1);
 }
 
 int main()
 {
+	PhoneBook pb;
 	std::string input;
 	int status = 1;
 
@@ -63,7 +68,12 @@ int main()
 		std::cout << YELLOW << " Type your commands in UPPERCASE words only!\n" << RESET;
 		std::cout << "\n";
 		std::cout << BOLD << " Please enter your choice: " << RESET;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+		{
+			std::cout << "\n";
+			std::cout << RED << " Force exiting the program...\n" << RESET;
+			exit(EXIT_SUCCESS);
+		}
 		if (input.empty())
 		{
 			std::cout << RED << "Input cannot be empty. Please enter a valid command.\n\n" << RESET;
@@ -72,7 +82,8 @@ int main()
 		else
 		{
 			std::cout << "You entered: " << input << std::endl;
-			status = executeCommand(convertCmd(input));
+			status = executeCommand(convertCmd(input), pb);
 		}
 	}
+	return (0);
 }
