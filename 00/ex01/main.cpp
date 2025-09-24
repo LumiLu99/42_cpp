@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 13:19:26 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 16:03:13 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int executeCommand(Command cmd, PhoneBook &pb)
 			std::cout << "You chose to SEARCH for a contact.\n";
 			break;
 		case EXIT:
-			std::cout << "Exiting the program...\n";
+			std::cout << RED << "Exiting the program...\n" << RESET;
 			return (0);
 		case INVALID:
 			std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
@@ -68,7 +68,11 @@ int main()
 		std::cout << "\n";
 		std::cout << BOLD << " Please enter your choice: " << RESET;
 		if (!std::getline(std::cin, input))
-			exit (EXIT_SUCCESS);
+		{
+			std::cout << "\n";
+			std::cout << RED << " Force exiting the program...\n" << RESET;
+			exit(EXIT_SUCCESS);
+		}
 		if (input.empty())
 		{
 			std::cout << RED << "Input cannot be empty. Please enter a valid command.\n\n" << RESET;

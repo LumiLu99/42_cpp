@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:44:49 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 13:50:44 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 15:01:56 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,19 @@ class Contact
 		std::string _Nickname;
 		std::string _PhoneNumber;
 		std::string _DarkestSecret;
-	
+
 	public:
-		void setFirstName(std::string name);
+		void setFirstName(std::string firstName);
+		void setLastName(std::string lastName);
+		void setNickname(std::string nickName);
+		void setPhoneNumber(std::string phoneNumber);
+		void setDarkSecret(std::string darkSecret);
 
 		const std::string& getFirstName() const;
+		const std::string& getLastName() const;
+		const std::string& getNickname() const;
+		const std::string& getPhoneNumber() const;
+		const std::string& getDarkSecret() const;
 };
 
 #endif

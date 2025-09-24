@@ -6,11 +6,12 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:45:21 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 13:43:59 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/24 15:30:24 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
+#include "main.hpp"
 #include "Contact.hpp"
 #include <iostream>
 #include <cstdlib>
