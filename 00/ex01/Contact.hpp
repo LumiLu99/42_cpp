@@ -6,11 +6,9 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:44:49 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 15:59:13 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 16:03:53 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "main.hpp"
 
 #ifndef CONTACT_HPP
 #define CONTACT_HPP

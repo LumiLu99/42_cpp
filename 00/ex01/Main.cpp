@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 14:46:11 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 16:52:24 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,16 @@ static int executeCommand(Command cmd, PhoneBook &pb)
 	switch (cmd)
 	{
 		case ADD:
-			std::cout << "You chose to ADD a contact.\n";
 			pb.addContact();
 			break;
 		case SEARCH:
-			std::cout << "You chose to SEARCH for a contact.\n";
 			pb.searchContact();
 			break;
 		case EXIT:
-			std::cout << RED << "Exiting the program...\n" << RESET;
+			std::cout << RED << "\nExiting the program...\n" << RESET;
 			return (0);
 		case INVALID:
-			std::cout << RED << "Invalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
+			std::cout << RED << "\nInvalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
 			break;
 	}
 	return (1);
@@ -75,7 +73,7 @@ int main()
 		std::cout << MAGENTA << " SEARCH: " << RESET << "Search Contact\n";
 		std::cout << RED << " EXIT: " << RESET << "Exit the program\n";
 		std::cout << CYAN << "=====================================\n" << RESET;
-		std::cout << YELLOW << " Type your commands in UPPERCASE words only!\n" << RESET;
+		std::cout << YELLOW << " Type your commands in UPPERCASE words and without spaces!\n" << RESET;
 		std::cout << "\n";
 		std::cout << BOLD << " Please enter your choice: " << RESET;
 		if (!std::getline(std::cin, input))
@@ -91,7 +89,6 @@ int main()
 		}
 		else
 		{
-			std::cout << "You entered: " << input << std::endl;
 			status = executeCommand(convertCmd(input), pb);
 		}
 	}

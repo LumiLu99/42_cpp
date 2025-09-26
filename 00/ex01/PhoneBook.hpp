@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 21:45:21 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 15:58:30 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 16:06:21 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class PhoneBook
 		void	addContact();
 		void	searchContact();
 		int		listContact();
-		int		validateContact();
+		int		validateContact(const std::string &str);
 };
 
 #endif
