@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 16:52:24 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 20:34:53 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int executeCommand(Command cmd, PhoneBook &pb)
 			std::cout << RED << "\nExiting the program...\n" << RESET;
 			return (0);
 		case INVALID:
-			std::cout << RED << "\nInvalid command. Please enter only ADD, SEARCH and EXIT.\n\n" << RESET;
+			std::cout << RED << "\nInvalid command. Please enter only ADD, SEARCH and EXIT without spaces.\n\n" << RESET;
 			break;
 	}
 	return (1);

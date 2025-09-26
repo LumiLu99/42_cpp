@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:06:27 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 20:26:35 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 21:10:30 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,10 @@ int PhoneBook::listContact()
 		"Nickname",
 	};
 
+	std::cout << "+----------+----------+----------+----------+\n";
 	for (int i = 0; i < 4; i++)
 		std::cout << std::setw(10) << std::right << Column[i] << "|";
-	std::cout << "\n";
+	std::cout << "\n+----------+----------+----------+----------+\n";
 	for (int i = 0; i < _count; i++)
 	{
 		std::cout << std::setw(10) << std::right << i << "|";
