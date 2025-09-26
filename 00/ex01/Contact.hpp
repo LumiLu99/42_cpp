@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "main.hpp"
+
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
