@@ -30,9 +30,10 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf
 
 # Source files
-SRC = main.cpp \
+SRC = Main.cpp \
 	Contact.cpp \
 	PhoneBook.cpp \
+	Utils.cpp	\
 
 # Build rules
 all: $(NAME)

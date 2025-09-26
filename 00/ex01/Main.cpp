@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 16:42:45 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 14:46:11 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.hpp"
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <stdlib.h>
+
+enum Command
+{
+	ADD,
+	SEARCH,
+	EXIT,
+	INVALID
+};
 
 static Command convertCmd(const std::string &input)
 {
@@ -25,7 +36,6 @@ static Command convertCmd(const std::string &input)
 	else
 		return (INVALID);
 }
-
 
 static int executeCommand(Command cmd, PhoneBook &pb)
 {
@@ -71,7 +81,7 @@ int main()
 		if (!std::getline(std::cin, input))
 		{
 			std::cout << "\n";
-			std::cout << RED << " Force exiting the program...\n" << RESET;
+			std::cout << RED << "Error. Force exiting the program...\n" << RESET;
 			exit(EXIT_SUCCESS);
 		}
 		if (input.empty())

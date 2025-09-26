@@ -6,16 +6,25 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:06:27 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/24 17:39:08 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 15:57:51 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <iomanip>
+
+std::string Formatting (const std::string &str);
+
+PhoneBook::PhoneBook()
+{
+	_count = 0;
+}
 
 void PhoneBook::addContact()
 {
 	Contact c;
 	std::string input;
+
 	const std::string field[5] = 
 	{
 		"First Name",
@@ -33,7 +42,7 @@ void PhoneBook::addContact()
 			if (!std::getline(std::cin, input))
 			{
 				std::cout << "\n";
-				std::cout << RED << " Force exiting the program...\n" << RESET;
+				std::cout << RED << "Error. Force exiting the program...\n" << RESET;
 				exit(EXIT_SUCCESS);
 			}
 			if (input.empty())
@@ -56,7 +65,7 @@ void PhoneBook::addContact()
 	}
 	if (_count < 8)
 	{
-		std::cout << "contact[" << _count << "] "; 
+		std::cout << "\nContact[" << _count << "] "; 
 		_contact[_count] = c;
 		_count++;
 	}
@@ -64,14 +73,87 @@ void PhoneBook::addContact()
 	{
 		_count = _count % 8;
 		_contact[_count] = c;
-		std::cout << "contact[" << _count << "] ";
+		std::cout << "Contact[" << _count << "] ";
 		_count++;
 	}
-	std::cout << GREEN << "Contact \"" << c.getFirstName() << "\" saved.\n" << RESET;
+	std::cout << GREEN << "\"" << c.getFirstName() << "\" saved.\n" << RESET;
 	return ;
 }
 
 void PhoneBook::searchContact()
+{
+	std::string input;
+
+	while (1)
+	{
+		if (!listContact())
+			return ;
+		std::cout << GREEN << "\nEnter \"BACK\" to go back to main menu." << RESET;
+		std::cout << BOLD << "\nEnter index of contact to display: " << RESET;
+		if (!std::getline(std::cin, input))
+		{
+			std::cout << "\n";
+			std::cout << RED << "Error. Force exiting the program...\n" << RESET;
+			exit(EXIT_SUCCESS);
+		}
+		if (input.empty())
+		{
+			std::cout << RED << "Input cannot be empty. Please enter a valid command.\n\n" << RESET;
+			continue;
+		}
+		if (input == "BACK")
+		{
+			std::cout << GREEN << "\nReturning...\n" << RESET;
+			return ;
+		}
+		else
+		{
+			if (!validateContact())
+			{
+				std::cout << RED << "\nInvalid or wrong input. Please enter only a valid index number.\n" << RESET;
+				continue;
+			}
+		}
+		break ;
+	}
+	return ;
+}
+
+int PhoneBook::listContact()
+{
+	if (_count == 0)
+	{
+		std::cout << "\nPhone Book is empty! Add your contacts through the main menu.\n";
+		std::cout << RED << "Returning...\n\n" << RESET;
+		return (0);
+	}
+
+	const std::string Column[4] =
+	{
+		"Index",
+		"First Name",
+		"Last Name",
+		"Nickname",
+	};
+
+	for (int i = 0; i < 4; i++)
+		std::cout << std::setw(10) << std::right << Column[i] << "|";
+	std::cout << "\n";
+	for (int i = 0; i < _count; i++)
+	{
+		std::cout << std::setw(10) << std::right << i + 1 << "|";
+		std::cout << std::setw(10) << std::right 
+		<< Formatting(_contact[i].getFirstName()) << "|";
+		std::cout << std::setw(10) << std::right 
+		<< Formatting(_contact[i].getLastName()) << "|";
+		std::cout << std::setw(10) << std::right 
+		<< Formatting(_contact[i].getNickname()) << "|";
+		std::cout << "\n";
+	}
+	return (1);
+}
+
+int PhoneBook::validateContact()
 {
 	
 }
