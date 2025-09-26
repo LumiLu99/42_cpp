@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:06:27 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 17:41:11 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/26 20:26:35 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iomanip>
 
 std::string Formatting (const std::string &str);
-int IsNumber(const std::string &str);
+int isValidInput(const std::string &str);
 int strToInt(const std::string &str);
 
 PhoneBook::PhoneBook()
@@ -91,7 +91,7 @@ void PhoneBook::searchContact()
 		if (!listContact())
 			return ;
 		std::cout << GREEN << "\nEnter \"BACK\" to go back to main menu.\n" << RESET;
-		std::cout << BOLD << "\nEnter index number of contact to display: " << RESET;
+		std::cout << BOLD << "\nEnter index number of contact to display (0-7): " << RESET;
 		if (!std::getline(std::cin, input))
 		{
 			std::cout << "\n";
@@ -159,17 +159,18 @@ int PhoneBook::listContact()
 
 int PhoneBook::validateContact(const std::string &str)
 {
-	if (!IsNumber(str))
+	int i;
+
+	if (!isValidInput(str))
 		return (0);
-	int i = strToInt(str);
-	if (i > _count - 1 || i > INT_MAX)
-		return (0);
+	else 
+		i = atoi(str.c_str());
 	std::cout << "What is in i: " << i << "\n";
 	std::cout << "First Name: " << _contact[i].getFirstName() << "\n";
-	std::cout << "Last Name: " << ": " << _contact[i].getLastName() << "\n";
-	std::cout << "Nickname: " << ": " << _contact[i].getNickname() << "\n";
-	std::cout << "Phone Number: " << ": " << _contact[i].getPhoneNumber() << "\n";
-	std::cout << "Darkest Secret: " << ": " << _contact[i].getDarkSecret() << "\n";
+	std::cout << "Last Name: " << _contact[i].getLastName() << "\n";
+	std::cout << "Nickname: " << _contact[i].getNickname() << "\n";
+	std::cout << "Phone Number: " << _contact[i].getPhoneNumber() << "\n";
+	std::cout << "Darkest Secret:" << _contact[i].getDarkSecret() << "\n";
 	std::cout << GREEN << "\nReturning...\n\n" << RESET;
 	return (1);
 }
