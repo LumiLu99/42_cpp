@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:06:27 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 21:10:30 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/27 15:14:46 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void PhoneBook::addContact()
 		std::cout << "Contact[" << _count << "] ";
 		_count++;
 	}
+	system("clear");
 	std::cout << GREEN << "\"" << c.getFirstName() << "\" saved.\n\n" << RESET;
 	return ;
 }
@@ -100,11 +101,13 @@ void PhoneBook::searchContact()
 		}
 		if (input.empty())
 		{
+			system("clear");
 			std::cout << RED << "Input cannot be empty. Please enter a valid command.\n\n" << RESET;
 			continue;
 		}
 		if (input == "BACK")
 		{
+			system("clear");
 			std::cout << GREEN << "\nReturning...\n" << RESET;
 			return ;
 		}
@@ -112,6 +115,7 @@ void PhoneBook::searchContact()
 		{
 			if (!validateContact(input))
 			{
+				system("clear");
 				std::cout << RED << "\nInvalid or wrong input. Please enter only valid index without spaces.\n\n" << RESET;
 				continue;
 			}
@@ -127,6 +131,7 @@ int PhoneBook::listContact()
 {
 	if (_count == 0)
 	{
+		system("clear");
 		std::cout << RED << "\nPhone Book is empty! Add your contacts through the main menu.\n" << RESET;
 		std::cout << RED << "Returning...\n\n" << RESET;
 		return (0);
@@ -140,10 +145,10 @@ int PhoneBook::listContact()
 		"Nickname",
 	};
 
-	std::cout << "+----------+----------+----------+----------+\n";
+	std::cout << CYAN << "+----------+----------+----------+----------+\n" << RESET;
 	for (int i = 0; i < 4; i++)
 		std::cout << std::setw(10) << std::right << Column[i] << "|";
-	std::cout << "\n+----------+----------+----------+----------+\n";
+	std::cout << CYAN << "\n+----------+----------+----------+----------+\n" << RESET;
 	for (int i = 0; i < _count; i++)
 	{
 		std::cout << std::setw(10) << std::right << i << "|";
@@ -155,6 +160,7 @@ int PhoneBook::listContact()
 		<< Formatting(_contact[i].getNickname()) << "|";
 		std::cout << "\n";
 	}
+	std::cout << CYAN << "\n+----------+----------+----------+----------+\n" << RESET;
 	return (1);
 }
 
@@ -166,12 +172,16 @@ int PhoneBook::validateContact(const std::string &str)
 		return (0);
 	else 
 		i = atoi(str.c_str());
-	std::cout << "What is in i: " << i << "\n";
+	system("clear");
+	if ( i > _count - 1)
+		return (0);
 	std::cout << "First Name: " << _contact[i].getFirstName() << "\n";
 	std::cout << "Last Name: " << _contact[i].getLastName() << "\n";
 	std::cout << "Nickname: " << _contact[i].getNickname() << "\n";
 	std::cout << "Phone Number: " << _contact[i].getPhoneNumber() << "\n";
 	std::cout << "Darkest Secret:" << _contact[i].getDarkSecret() << "\n";
-	std::cout << GREEN << "\nReturning...\n\n" << RESET;
+	std::cout << BOLD << GREEN << "\n\nPress ENTER to continue..." << RESET;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	system("clear");
 	return (1);
 }

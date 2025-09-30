@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:27:22 by yelu              #+#    #+#             */
-/*   Updated: 2025/09/26 20:34:53 by yelu             ###   ########.fr       */
+/*   Updated: 2025/09/27 15:00:22 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int main()
 	std::string input;
 	int status = 1;
 
+	system("clear");
 	while (status)
 	{
 		std::cout << CYAN << "=====================================\n" << RESET;
@@ -84,11 +85,13 @@ int main()
 		}
 		if (input.empty())
 		{
+			system("clear");
 			std::cout << RED << "Input cannot be empty. Please enter a valid command.\n\n" << RESET;
 			continue;
 		}
 		else
 		{
+			system("clear");
 			status = executeCommand(convertCmd(input), pb);
 		}
 	}
