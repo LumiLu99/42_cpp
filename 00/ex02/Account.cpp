@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 10:42:04 by yelu              #+#    #+#             */
-/*   Updated: 2025/10/01 23:27:37 by yelu             ###   ########.fr       */
+/*   Updated: 2025/10/02 15:31:04 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,32 @@ void	Account::makeDeposit( int deposit )
 	p_amount = _amount;
 	_amount += deposit;
 	_nbDeposits++;
+	_totalNbDeposits++;
 	_totalAmount += deposit;
 	std::cout << "index:" << _accountIndex << ";p_amount:" << p_amount
 	<< ";deposits:" << deposit << ";amount:" << _amount
 	<< ";nb_deposits:" << _nbDeposits << "\n";
+}
+
+bool	Account::makeWithdrawal(int withdrawal)
+{
+	int p_amount;
+
+	p_amount = _amount;
+	if (_amount < withdrawal)
+	{
+		std::cout << "index:" << _accountIndex << ";p_amount:" << p_amount
+		<< ";withdrawals:refused";
+		return (false);
+	}
+	_amount -= withdrawal;
+	_nbWithdrawals++;
+	_totalNbWithdrawals++;
+	_totalAmount -= withdrawal;
+	std::cout << "index:" << _accountIndex << ";p_amount:" << p_amount
+	<< ";withdrawals:" << withdrawal << ";amount:" << _amount
+	<< ";nb_withdrawals:" << _nbWithdrawals << "\n";
+	return (true);
 }
 
 Account::~Account() {}
@@ -119,4 +141,16 @@ int	main()
 	
 	Account::displayAccountsInfos();
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
+
+	for ( acc_int_t it( acc_begin, wit_begin );
+		it.first != acc_end && it.second != wit_end;
+		++(it.first), ++(it.second) ) {
+
+		(*(it.first)).makeWithdrawal( *(it.second) );
+	}
+
+	Account::displayAccountsInfos();
+	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
+
+	return 0;
 }
