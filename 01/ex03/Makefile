@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2025/11/28 00:36:36 by yelu             ###   ########.fr        #
+#    Updated: 2025/11/30 00:18:36 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ PINK 	=	\033[35m
 RESET	=	\033[0m
 
 # Program name
-NAME = zombie
+NAME = human
 
 # Directories
 SRC_DIR = src
@@ -30,10 +30,10 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf
 
 # Source files
-SRC = main.cpp \
-	Zombie.cpp	\
-	zombieHorde.cpp
-	
+SRC = main.cpp	\
+	  HumanA.cpp \
+	  Weapon.cpp	\
+	  HumanB.cpp
 
 # Build rules
 all: $(NAME)

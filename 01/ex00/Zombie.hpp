@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 22:09:28 by yelu              #+#    #+#             */
-/*   Updated: 2025/11/08 23:42:14 by yelu             ###   ########.fr       */
+/*   Updated: 2025/11/27 20:41:04 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class	Zombie
 {
 	private:
-		std::string	_Name;
+		std::string	_name;
 	public:
 		Zombie(std::string name);
 		~Zombie();

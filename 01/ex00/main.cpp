@@ -16,9 +16,9 @@ int main()
 {
     Zombie zom("Foo");
     zom.announce();
-    Zombie *hehe = newZombie("Strange");
-    hehe->announce();
-    Zombie randomZombie("Random");
-    randomZombie.announce();
-    delete hehe;
+    Zombie *strange = newZombie("Strange");
+    strange->announce();
+    Zombie random("Random");
+    random.announce();
+    delete strange;
 }

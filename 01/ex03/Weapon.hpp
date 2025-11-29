@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/09 00:02:33 by yelu              #+#    #+#             */
-/*   Updated: 2025/11/28 00:39:30 by yelu             ###   ########.fr       */
+/*   Created: 2025/11/29 15:29:56 by yelu              #+#    #+#             */
+/*   Updated: 2025/11/29 15:29:56 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef WEAPON_HPP
+#define WEAPON_HPP
 
-int main()
+#include <iostream>
+
+class Weapon
 {
-    Zombie *horde;
-    horde = zombieHorde(5, "Lol");
-    delete [] horde;
-}
+    private:
+        std::string type;
+    public:
+        Weapon(const std::string &type);
+        const std::string& getType() const;
+        void setType(const std::string &newType);
+};
+
+#endif

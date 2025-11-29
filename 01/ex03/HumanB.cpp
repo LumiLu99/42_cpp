@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/09 00:02:33 by yelu              #+#    #+#             */
-/*   Updated: 2025/11/28 00:39:30 by yelu             ###   ########.fr       */
+/*   Created: 2025/11/30 00:03:34 by yelu              #+#    #+#             */
+/*   Updated: 2025/11/30 00:13:51 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanB.hpp"
 
-int main()
+HumanB::HumanB(const std::string &name) : name(name) {}
+
+void HumanB::attack()
 {
-    Zombie *horde;
-    horde = zombieHorde(5, "Lol");
-    delete [] horde;
+    std::cout << name << " attacks with their " << weapon->getType() << "\n";
+}
+
+void HumanB::setWeapon(Weapon &weapon)
+{
+    this->weapon = &weapon;
 }

@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/09 00:02:33 by yelu              #+#    #+#             */
-/*   Updated: 2025/11/28 00:39:30 by yelu             ###   ########.fr       */
+/*   Created: 2025/11/29 20:45:58 by yelu              #+#    #+#             */
+/*   Updated: 2025/11/30 00:27:22 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HUMANA_HPP
+#define HUMANA_HPP
 
-int main()
+#include <iostream>
+#include "Weapon.hpp"
+
+class HumanA
 {
-    Zombie *horde;
-    horde = zombieHorde(5, "Lol");
-    delete [] horde;
-}
+    private:
+        std::string name;
+        Weapon &weapon;
+
+    public:
+        HumanA(const std::string &name, Weapon &weapon);
+        void attack();
+};
+
+#endif
