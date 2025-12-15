@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2025/11/09 00:00:40 by yelu             ###   ########.fr        #
+#    Updated: 2025/11/09 19:20:04 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ RM = rm -rf
 # Source files
 SRC = main.cpp \
 	Zombie.cpp	\
-	newZombie.cpp
+	zombieHorde.cpp
 	
 
 # Build rules
