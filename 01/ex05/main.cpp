@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 22:09:24 by yelu              #+#    #+#             */
-/*   Updated: 2025/11/27 20:41:04 by yelu             ###   ########.fr       */
+/*   Created: 2025/12/04 14:09:57 by yelu              #+#    #+#             */
+/*   Updated: 2025/12/06 17:17:46 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Harl.hpp"
 
-Zombie::Zombie(std::string name)
+int main(int argc, char **argv)
 {
-    _name = name;
-    std::cout << "Zombie " << _name << " spawned." << "\n";
-}
+    Harl harl;
 
-Zombie::~Zombie()
-{
-    std::cout << "Zombie " << _name << " despawned." << "\n";
-}
-
-void    Zombie::announce(void)
-{
-    std::cout << _name << ": BraiiiiiinnnzzzZ..." << "\n";
+    if (argc != 2)
+    {
+        std::cerr << "Usage: " << argv[0] << " <level>" << "\n";
+        return (1);
+    }
+    else
+    {
+        harl.complain(argv[1]);
+        return (0);
+    }
 }

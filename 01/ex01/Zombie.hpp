@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 00:02:29 by yelu              #+#    #+#             */
-/*   Updated: 2025/11/09 19:16:21 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/15 13:53:15 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 class	Zombie
 {
 	private:
-		std::string	_Name;
+		std::string	_name;
 	public:
-		Zombie();
-		Zombie(std::string name);
 		~Zombie();
 		void	announce(void);
+		void	setName(std::string name);
 };
 
 Zombie *zombieHorde(int N, std::string name);

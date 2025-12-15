@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2025/12/15 13:52:42 by yelu             ###   ########.fr        #
+#    Updated: 2025/12/06 17:17:32 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ PINK 	=	\033[35m
 RESET	=	\033[0m
 
 # Program name
-NAME = zombie
+NAME = harl
 
 # Directories
 SRC_DIR = src
@@ -31,9 +31,7 @@ RM = rm -rf
 
 # Source files
 SRC = main.cpp \
-	Zombie.cpp	\
-	zombieHorde.cpp
-	
+	   Harl.cpp
 
 # Build rules
 all: $(NAME)
