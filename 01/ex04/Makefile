@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2025/12/04 14:25:21 by yelu             ###   ########.fr        #
+#    Updated: 2025/12/15 22:35:08 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,7 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf
 
 # Source files
-SRC = main.cpp \
-	  Harl.cpp
+SRC = main.cpp
 
 # Build rules
 all: $(NAME)
