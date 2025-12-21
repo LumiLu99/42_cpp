@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/16 14:49:00 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/21 14:53:26 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ Fixed::Fixed(const int integer)
 	fixedPointValue = integer << fractionalBits;
 	std::cout << "Int constructor called" << "\n";
 }
+
 Fixed::Fixed(const float floatingPoint)
 {
 	fixedPointValue = roundf(floatingPoint * (1 << fractionalBits));
@@ -46,13 +47,13 @@ Fixed &Fixed::operator=(const Fixed &src)
 		fixedPointValue = src.getRawBits();
 	}
 	std::cout << "Copy assignment operator called" << "\n";
-	return *this;
+	return (*this);
 }
 
 int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << "\n";
-	return fixedPointValue;
+	return (fixedPointValue);
 }
 
 void Fixed::setRawBits(int const raw)
