@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:03 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/24 03:05:28 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/29 01:39:41 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ class Fixed
 		bool operator==(Fixed const &src) const;
 		bool operator!=(Fixed const &src) const;
 
-		
+		Fixed Fixed::operator+(Fixed const &src) const;
+		Fixed Fixed::operator-(Fixed const &src) const;
+		Fixed Fixed::operator*(Fixed const &src) const;
+		Fixed Fixed::operator/(Fixed const &src) const;
 	};
 	
 std::ostream &operator<<(std::ostream &out, const Fixed &src);
