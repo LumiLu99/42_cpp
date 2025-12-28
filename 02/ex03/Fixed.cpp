@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/24 02:45:40 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/24 03:16:02 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,36 @@ std::ostream &operator<<(std::ostream &out, const Fixed &src)
 {
 	out << src.toFloat();
 	return (out);
+}
+
+bool Fixed::operator>(Fixed const &src) const
+{
+	return (this->fixedPointValue > src.fixedPointValue);
+}
+
+bool Fixed::operator<(Fixed const &src) const
+{
+	return (this->fixedPointValue < src.fixedPointValue);
+}
+
+bool Fixed::operator>=(Fixed const &src) const
+{
+	return (this->fixedPointValue >= src.fixedPointValue);
+}
+
+bool Fixed::operator<=(Fixed const &src) const
+{
+	return (this->fixedPointValue <= src.fixedPointValue);
+}
+
+bool Fixed::operator==(Fixed const &src) const
+{
+	return (this->fixedPointValue == src.fixedPointValue);
+}
+
+bool Fixed::operator!=(Fixed const &src) const
+{
+	return !(*this == src);
 }
 
 int Fixed::getRawBits(void) const
