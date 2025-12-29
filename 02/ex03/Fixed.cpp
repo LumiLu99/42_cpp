@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/29 02:06:46 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/29 17:45:34 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,32 +120,42 @@ Fixed Fixed::operator-(Fixed const &src) const
 }
 
 // Multiplication
+// 1. Cast to long long to prevent overflow during multiplication
+// 2. Multiply raw values
+// 3. Shift right (divide) by fractional bits to reset scale
 Fixed Fixed::operator*(const Fixed &src) const 
 {
     Fixed result;
-    // 1. Cast to long long to prevent overflow during multiplication
-    // 2. Multiply raw values
-    // 3. Shift right (divide) by fractional bits to reset scale
     long long temp = (long long)this->getRawBits() * (long long)src.getRawBits();
     result.setRawBits(temp >> fractionalBits); 
     return result;
 }
 
+// Fixed Fixed::operator*(const Fixed &src) const
+// {
+//     return Fixed(this->toFloat() * src.toFloat());
+// }
+
 // Division
+// 1. Cast to long long
+// 2. Shift left (multiply) the numerator to gain precision
+// 3. Divide by the denominator
 Fixed Fixed::operator/(const Fixed &src) const 
 {
     Fixed result;
-    // 1. Cast to long long
-    // 2. Shift left (multiply) the numerator to gain precision
-    // 3. Divide by the denominator
     long long temp = (long long)this->getRawBits() << fractionalBits;
     result.setRawBits(temp / src.getRawBits());
     return result;
 }
 
+// Fixed Fixed::operator/(const Fixed &src) const
+// {
+//     return Fixed(this->toFloat() / src.toFloat());
+// }
+
 Fixed &Fixed::operator++()
 {
-	this->_value++;
+	this->fixedPointValue++;
 	return (*this);
 }
 
@@ -153,14 +163,14 @@ Fixed &Fixed::operator++()
 Fixed Fixed::operator++(int)
 {
 	Fixed prev = *this;
-	this->_value++;
+	this->fixedPointValue++;
 	return prev;
 }
 
 // pre-decrement
 Fixed &Fixed::operator--()
 {
-	this->_value--;
+	this->fixedPointValue--;
 	return (*this);
 }
 
@@ -168,7 +178,7 @@ Fixed &Fixed::operator--()
 Fixed Fixed::operator--(int)
 {
 	Fixed prev = *this;
-	this->_value--;
+	this->fixedPointValue--;
 	return prev;
 }
 
