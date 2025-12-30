@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/30 15:06:27 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/30 22:50:04 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,13 +152,13 @@ Fixed Fixed::operator/(const Fixed &src) const
 	Fixed result;
 	long long temp;
 
-	if (src.getRawBits() == 0)
+	if (src.fixedPointValue == 0)
 	{
 		std::cerr << "Error: Division by zero" << std::endl;
 		return result;
 	}
-	temp = (long long)this->getRawBits() << fractionalBits;
-	result.setRawBits(temp / src.getRawBits());
+	temp = (long long)this->fixedPointValue << fractionalBits;
+	result.setRawBits(temp / src.fixedPointValue);
 	return (result);
 }
 
