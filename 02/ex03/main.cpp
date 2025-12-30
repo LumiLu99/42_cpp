@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:37:15 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/24 02:54:29 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/30 08:36:11 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int main(void)
 	std::cout << a << std::endl;
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
-	
+
 	std::cout << b << std::endl;
 
 	std::cout << Fixed::max(a, b) << std::endl;
 
 	return 0;
 }
+

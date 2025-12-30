@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/29 17:45:34 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/30 10:23:18 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ std::ostream &operator<<(std::ostream &out, const Fixed &src)
 	return (out);
 }
 
+// Comparison operators
+// Last const mean the function itself will not modify the current object
 bool Fixed::operator>(Fixed const &src) const
 {
 	return (this->fixedPointValue > src.fixedPointValue);
@@ -125,10 +127,12 @@ Fixed Fixed::operator-(Fixed const &src) const
 // 3. Shift right (divide) by fractional bits to reset scale
 Fixed Fixed::operator*(const Fixed &src) const 
 {
-    Fixed result;
-    long long temp = (long long)this->getRawBits() * (long long)src.getRawBits();
-    result.setRawBits(temp >> fractionalBits); 
-    return result;
+	Fixed result;
+	long long temp;
+
+	temp = (long long)this->fixedPointValue * (long long)src.fixedPointValue;
+	result.setRawBits(temp >> fractionalBits); 
+	return (result);
 }
 
 // Fixed Fixed::operator*(const Fixed &src) const
@@ -142,10 +146,12 @@ Fixed Fixed::operator*(const Fixed &src) const
 // 3. Divide by the denominator
 Fixed Fixed::operator/(const Fixed &src) const 
 {
-    Fixed result;
-    long long temp = (long long)this->getRawBits() << fractionalBits;
-    result.setRawBits(temp / src.getRawBits());
-    return result;
+	Fixed result;
+	long long temp;
+
+	temp = (long long)this->getRawBits() << fractionalBits;
+	result.setRawBits(temp / src.getRawBits());
+	return (result);
 }
 
 // Fixed Fixed::operator/(const Fixed &src) const
@@ -159,18 +165,20 @@ Fixed &Fixed::operator++()
 	return (*this);
 }
 
-// post-increment
+// post-increment pass int to distinguish from pre-increment
+// compiler passes 0 to that int parameter to trigger
+// the correct version
 Fixed Fixed::operator++(int)
 {
 	Fixed prev = *this;
 	this->fixedPointValue++;
-	return prev;
+	return (prev);
 }
 
 // pre-decrement
 Fixed &Fixed::operator--()
 {
-	this->fixedPointValue--;
+	fixedPointValue--;
 	return (*this);
 }
 
@@ -182,18 +190,20 @@ Fixed Fixed::operator--(int)
 	return prev;
 }
 
-// The non-const version is for modifiable objects.
-// The const version is for read-only objects.
-// The reason min and max are static is that they do not operate on a specific instance of Fixed.
-// Instead, they take two Fixed instances as arguments and return one of them.
-// A static member function min that takes as parameters two references on fixed-point
-// numbers, and returns a reference to the smallest one.
+// A static member function min that takes two references to fixed-point numbers as
+// parameters, and returns a reference to the smallest one
+// Ternary Operator (condition) ? value_if_true : value_if_false
+// Shorthand way of writing an if-else statement
+// Public Overloaded Member Function: "Overloading" means giving 
+// multiple functions the same name but different parameters.
+// Static means the function belongs to the class generally, 
+// not to any specific object. There is no this pointer.
 Fixed &Fixed::min(Fixed &a, Fixed &b)
 {
 	return (a < b) ? a : b;
 }
 
-// A static member function min that takes as parameters two references to constant
+// A static member function min that takes as parameters two references to CONSTANT
 // fixed-point numbers, and returns a reference to the smallest one.
 Fixed const &Fixed::min(Fixed const &a, Fixed const &b)
 {
