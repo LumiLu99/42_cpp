@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/30 10:23:18 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/30 15:06:27 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,9 @@ Fixed Fixed::operator+(Fixed const &src) const
 	return Fixed(this->toFloat() + src.toFloat());
 }
 
+// Cannot be "return Fixed(this->fixedPointValue - src.fixedPointValue)"
+// because the constructor Fixed(int) expects an integer representing
+// will accidentally shift the value left by fractionalBits
 Fixed Fixed::operator-(Fixed const &src) const
 {
 	Fixed result;
@@ -149,6 +152,11 @@ Fixed Fixed::operator/(const Fixed &src) const
 	Fixed result;
 	long long temp;
 
+	if (src.getRawBits() == 0)
+	{
+		std::cerr << "Error: Division by zero" << std::endl;
+		return result;
+	}
 	temp = (long long)this->getRawBits() << fractionalBits;
 	result.setRawBits(temp / src.getRawBits());
 	return (result);
@@ -187,7 +195,7 @@ Fixed Fixed::operator--(int)
 {
 	Fixed prev = *this;
 	this->fixedPointValue--;
-	return prev;
+	return (prev);
 }
 
 // A static member function min that takes two references to fixed-point numbers as
