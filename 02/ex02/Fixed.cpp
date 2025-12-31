@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/27 14:18:42 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/31 11:00:15 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &src)
 {
-	fixedPointValue = src.getRawBits();
+	fixedPointValue = src.fixedPointValue;
 	std::cout << "Copy constructor called" << "\n";
 }
 
@@ -44,50 +44,48 @@ Fixed &Fixed::operator=(const Fixed &src)
 {
 	if (this != &src)
 	{
-		fixedPointValue = src.getRawBits();
+		fixedPointValue = src.fixedPointValue;
 	}
 	std::cout << "Copy assignment operator called" << "\n";
 	return (*this);
 }
 
-bool Fixed::operator>(const Fixed &src) const
+std::ostream &operator<<(std::ostream &out, const Fixed &src)
+{
+	out << src.toFloat();
+	return (out);
+}
+
+// Comparison operators
+// Last const mean the function itself will not modify the current object
+bool Fixed::operator>(Fixed const &src) const
 {
 	return (this->fixedPointValue > src.fixedPointValue);
 }
 
-bool Fixed::operator<(const Fixed &src) const
+bool Fixed::operator<(Fixed const &src) const
 {
 	return (this->fixedPointValue < src.fixedPointValue);
 }
 
-bool Fixed::operator>=(const Fixed &src) const
+bool Fixed::operator>=(Fixed const &src) const
 {
 	return (this->fixedPointValue >= src.fixedPointValue);
 }
 
-bool Fixed::operator<=(const Fixed &src) const
+bool Fixed::operator<=(Fixed const &src) const
 {
 	return (this->fixedPointValue <= src.fixedPointValue);
 }
 
-bool Fixed::operator==(const Fixed &src) const
+bool Fixed::operator==(Fixed const &src) const
 {
 	return (this->fixedPointValue == src.fixedPointValue);
 }
 
-bool Fixed::operator!=(const Fixed &src) const
+bool Fixed::operator!=(Fixed const &src) const
 {
-	return (this->fixedPointValue != src.fixedPointValue);
-}
-
-Fixed &Fixed::operator++()
-{
-
-}
-
-Fixed Fixed::operator++(int)
-{
-	
+	return !(*this == src);
 }
 
 int Fixed::getRawBits(void) const
@@ -101,18 +99,135 @@ void Fixed::setRawBits(int const raw)
 	fixedPointValue = raw;
 }
 
-float Fixed::toFloat(void) const
-{
-	return ((float)fixedPointValue / (float)(1 << fractionalBits));
-}
-
 int Fixed::toInt(void) const
 {
 	return (fixedPointValue >> fractionalBits);
 }
 
-std::ostream &operator<<(std::ostream &out, const Fixed &input)
+float Fixed::toFloat(void) const
 {
-	out << input.toFloat();
-	return out;
+	return ((float)(fixedPointValue) / (1 << fractionalBits));
+}
+
+Fixed Fixed::operator+(Fixed const &src) const
+{
+	return Fixed(this->toFloat() + src.toFloat());
+}
+
+// Cannot be "return Fixed(this->fixedPointValue - src.fixedPointValue)"
+// because the constructor Fixed(int) expects an integer representing
+// will accidentally shift the value left by fractionalBits
+Fixed Fixed::operator-(Fixed const &src) const
+{
+	Fixed result;
+	result.setRawBits(this->getRawBits() - src.getRawBits());
+	return (result);
+}
+
+// Multiplication
+// 1. Cast to long long to prevent overflow during multiplication
+// 2. Multiply raw values
+// 3. Shift right (divide) by fractional bits to reset scale
+Fixed Fixed::operator*(const Fixed &src) const 
+{
+	Fixed result;
+	long long temp;
+
+	temp = (long long)this->fixedPointValue * (long long)src.fixedPointValue;
+	result.setRawBits(temp >> fractionalBits); 
+	return (result);
+}
+
+// Fixed Fixed::operator*(const Fixed &src) const
+// {
+//     return Fixed(this->toFloat() * src.toFloat());
+// }
+
+// Division
+// 1. Cast to long long
+// 2. Shift left (multiply) the numerator to gain precision
+// 3. Divide by the denominator
+Fixed Fixed::operator/(const Fixed &src) const 
+{
+	Fixed result;
+	long long temp;
+
+	if (src.fixedPointValue == 0)
+	{
+		std::cerr << "Error: Division by zero" << std::endl;
+		return result;
+	}
+	temp = (long long)this->fixedPointValue << fractionalBits;
+	result.setRawBits(temp / src.fixedPointValue);
+	return (result);
+}
+
+// Fixed Fixed::operator/(const Fixed &src) const
+// {
+//     return Fixed(this->toFloat() / src.toFloat());
+// }
+
+Fixed &Fixed::operator++()
+{
+	this->fixedPointValue++;
+	return (*this);
+}
+
+// post-increment pass int to distinguish from pre-increment
+// compiler passes 0 to that int parameter to trigger
+// the correct version
+Fixed Fixed::operator++(int)
+{
+	Fixed prev = *this;
+	this->fixedPointValue++;
+	return (prev);
+}
+
+// pre-decrement
+Fixed &Fixed::operator--()
+{
+	fixedPointValue--;
+	return (*this);
+}
+
+// post-decrement
+Fixed Fixed::operator--(int)
+{
+	Fixed prev = *this;
+	this->fixedPointValue--;
+	return (prev);
+}
+
+// A static member function min that takes two references to fixed-point numbers as
+// parameters, and returns a reference to the smallest one
+// Ternary Operator (condition) ? value_if_true : value_if_false
+// Shorthand way of writing an if-else statement
+// Public Overloaded Member Function: "Overloading" means giving 
+// multiple functions the same name but different parameters.
+// Static means the function belongs to the class generally, 
+// not to any specific object. There is no this pointer.
+Fixed &Fixed::min(Fixed &a, Fixed &b)
+{
+	return (a < b) ? a : b;
+}
+
+// A static member function min that takes as parameters two references to CONSTANT
+// fixed-point numbers, and returns a reference to the smallest one.
+Fixed const &Fixed::min(Fixed const &a, Fixed const &b)
+{
+	return (a < b) ? a : b;
+}
+
+// A static member function max that takes as parameters two references on fixed-point
+// numbers, and returns a reference to the greatest one.
+Fixed &Fixed::max(Fixed &a, Fixed &b)
+{
+	return (a > b) ? a : b;
+}
+
+// A static member function max that takes as parameters two references to constant
+// fixed-point numbers, and returns a reference to the greatest one.
+Fixed const &Fixed::max(Fixed const &a, Fixed const &b)
+{
+	return (a > b) ? a : b;
 }

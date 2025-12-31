@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:03 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/27 14:11:19 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/31 11:00:51 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define FIXED_HPP
 
 #include <iostream>
-#include <cmath>
 #include <cmath>
 
 class Fixed
@@ -26,23 +25,38 @@ class Fixed
 		Fixed();
 		Fixed(const int integer);
 		Fixed(const float floatingPoint);
-		~Fixed();
 		Fixed(const Fixed &src);
 		Fixed &operator=(const Fixed &src);
+		~Fixed();
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
-		bool Fixed::operator>(const Fixed &src) const;
-		bool Fixed::operator<(const Fixed &src) const;
-		bool Fixed::operator>=(const Fixed &src) const;
-		bool Fixed::operator<=(const Fixed &src) const;
-		bool Fixed::operator==(const Fixed &src) const;
-		bool Fixed::operator!=(const Fixed &src) const;
 
+		bool operator>(Fixed const &src) const;
+		bool operator<(Fixed const &src) const;
+		bool operator>=(Fixed const &src) const;
+		bool operator<=(Fixed const &src) const;
+		bool operator==(Fixed const &src) const;
+		bool operator!=(Fixed const &src) const;
 
-};
+		Fixed operator+(Fixed const &src) const;
+		Fixed operator-(Fixed const &src) const;
+		Fixed operator*(Fixed const &src) const;
+		Fixed operator/(Fixed const &src) const;
 
-std::ostream &operator<<(std::ostream &out, const Fixed &input);
+		Fixed &operator++();
+		Fixed operator++(int);
+		Fixed &operator--();
+		Fixed operator--(int);
+
+		static Fixed &min(Fixed &a, Fixed &b);
+		static Fixed const &min(Fixed const &a, Fixed const &b);
+		static Fixed &max(Fixed &a, Fixed &b);
+		static Fixed const &max(Fixed const &a, Fixed const &b);
+	};
+	
+std::ostream &operator<<(std::ostream &out, const Fixed &src);
+
 
 #endif
