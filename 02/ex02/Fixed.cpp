@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:06:00 by yelu              #+#    #+#             */
-/*   Updated: 2025/12/30 20:30:12 by yelu             ###   ########.fr       */
+/*   Updated: 2025/12/27 14:18:42 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ Fixed::Fixed(const int integer)
 Fixed::Fixed(const float floatingPoint)
 {
 	fixedPointValue = roundf(floatingPoint * (1 << fractionalBits));
-	fixedPointValue = roundf(floatingPoint * (1 << fractionalBits));
 	std::cout << "Float constructor called" << "\n";
 }
 
@@ -37,7 +36,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &src)
 {
-	fixedPointValue = src.fixedPointValue;
+	fixedPointValue = src.getRawBits();
 	std::cout << "Copy constructor called" << "\n";
 }
 
@@ -45,16 +44,50 @@ Fixed &Fixed::operator=(const Fixed &src)
 {
 	if (this != &src)
 	{
-		fixedPointValue = src.fixedPointValue;
+		fixedPointValue = src.getRawBits();
 	}
 	std::cout << "Copy assignment operator called" << "\n";
 	return (*this);
 }
 
-std::ostream &operator<<(std::ostream &out, const Fixed &src)
+bool Fixed::operator>(const Fixed &src) const
 {
-	out << src.toFloat();
-	return (out);
+	return (this->fixedPointValue > src.fixedPointValue);
+}
+
+bool Fixed::operator<(const Fixed &src) const
+{
+	return (this->fixedPointValue < src.fixedPointValue);
+}
+
+bool Fixed::operator>=(const Fixed &src) const
+{
+	return (this->fixedPointValue >= src.fixedPointValue);
+}
+
+bool Fixed::operator<=(const Fixed &src) const
+{
+	return (this->fixedPointValue <= src.fixedPointValue);
+}
+
+bool Fixed::operator==(const Fixed &src) const
+{
+	return (this->fixedPointValue == src.fixedPointValue);
+}
+
+bool Fixed::operator!=(const Fixed &src) const
+{
+	return (this->fixedPointValue != src.fixedPointValue);
+}
+
+Fixed &Fixed::operator++()
+{
+
+}
+
+Fixed Fixed::operator++(int)
+{
+	
 }
 
 int Fixed::getRawBits(void) const
