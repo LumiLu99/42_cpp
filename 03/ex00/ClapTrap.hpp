@@ -28,14 +28,13 @@ class ClapTrap
 		ClapTrap(const ClapTrap &src);
 		ClapTrap &operator=(const ClapTrap &src);
 		~ClapTrap();
-		
+
 		// Parameterized constructor
 		ClapTrap(std::string name);
 
-		// --- Getters & Setters ---
-		std::string getName() const;
-		int			getEnergyPoints() const;
-		int			getDamagePoints() const;
+		// Getter
+		std::string	getName() const;
+		int getHitPoints() const;
 
 		// --- Actions ---
 		void	attack(const std::string& target);
