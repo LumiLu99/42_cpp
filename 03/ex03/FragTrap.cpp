@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:47:07 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 12:50:34 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/13 13:13:37 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,3 +149,4 @@ void	FragTrap::highFivesGuys(void)
 {
     std::cout << "FragTrap " << _name << " is trying to give you a high five!\n";
 }
+

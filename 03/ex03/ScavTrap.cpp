@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 17:47:32 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/12 21:03:35 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/13 13:57:41 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ ScavTrap::ScavTrap() : ClapTrap()
 // Copy constructor
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
+	this->_name = other._name;
+	this->_hitPoints = other._hitPoints;
+	this->_energyPoints = other._energyPoints;
+	this->_attackDamage = other._attackDamage;
 	std::cout << "Copy constructor called. ScavTrap " << _name << " spawned!" << "\n";
 }
 
