@@ -10,23 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
 
-int	main()
+int main()
 {
-	std::cout << "### TESTING CONSTRUCTION ###\n\n";
-    ScavTrap A("Robot_A");
-    ScavTrap B("Robot_B");
-    ScavTrap C(B); // Copy constructor test
+    DiamondTrap Monster("Monster");
 
-    std::cout << "\n\n### TESTING SPECIAL CAPACITY (Gate Keeper) ###\n\n";
-    A.guardGate();
-    B.guardGate();
-
-    std::cout << "\n### TESTING ATTACK & DAMAGE ###\n";
-    A.attack("some random target");
-    A.attack(B);
-    std::cout << "Robot B has " << B.getHitPoints() << " hit points left.\n";
-    B.beRepaired(10);
-    std::cout << "Robot B has " << B.getHitPoints() << " hit points left.\n";
+    Monster.whoAmI();
+    Monster.attack("Target Dummy");
+    Monster.takeDamage(30);
+    Monster.beRepaired(20);
+    Monster.guardGate();
+    Monster.highFivesGuys();
 }
