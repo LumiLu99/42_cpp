@@ -16,6 +16,8 @@ int main()
 {
     DiamondTrap Monster("Monster");
 
+    std::cout << "Energy Points: " << Monster.getEnergyPoints() << std::endl;
+    std::cout << "Attack Damage: " << Monster.getAttackDamage() << std::endl;
     Monster.whoAmI();
     Monster.attack("Target Dummy");
     Monster.takeDamage(30);

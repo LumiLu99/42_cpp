@@ -36,6 +36,7 @@ class ClapTrap
 		std::string	getName() const;
 		int getHitPoints() const;
 		int getEnergyPoints() const;
+		int getAttackDamage() const;
 
 		// --- Actions ---
 		void	attack(const std::string& target);

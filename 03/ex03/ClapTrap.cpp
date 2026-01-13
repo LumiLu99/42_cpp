@@ -81,6 +81,11 @@ int ClapTrap::getEnergyPoints() const
 	return (_energyPoints);
 }
 
+int ClapTrap::getAttackDamage() const
+{
+	return (_attackDamage);
+}
+
 // -------------------------
 // --- Actions ---
 void	ClapTrap::takeDamage(unsigned int amount)

@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:47:07 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/12 22:11:23 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/13 12:50:34 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ FragTrap::FragTrap() : ClapTrap()
 {
 	this->_name = "Default";
 	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->_energyPoints = 100;
+	this->_attackDamage = 30;
 	std::cout << "FragTrap \"Default\" spawned!" << "\n";
 }
 
 // Copy constructor
 FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 {
+	this->_name = other._name;
+	this->_hitPoints = other._hitPoints;
+	this->_energyPoints = other._energyPoints;
+	this->_attackDamage = other._attackDamage;
 	std::cout << "Copy constructor called. FragTrap " << _name << " spawned!" << "\n";
 }
 
@@ -66,8 +70,8 @@ FragTrap::~FragTrap()
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->_energyPoints = 100;
+	this->_attackDamage = 30;
 	std::cout << "FragTrap \"" << _name << "\" spawned!" << "\n";
 }
 
