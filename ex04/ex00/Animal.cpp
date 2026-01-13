@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:26 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 14:05:07 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/13 23:51:13 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ Animal &Animal::operator=(const Animal &other)
 Animal::~Animal()
 {
 	std::cout << "Animal type " << type << "destructor called.\n";
-}
-
-// Parameterized constructor
-Animal::Animal(std::string type)
-{
-	this->type = type;
-	std::cout << "Parameterized constructor type " << type << " called.";
 }
 
 // Actions

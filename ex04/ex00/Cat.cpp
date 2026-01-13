@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:06 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 14:42:26 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/13 23:51:01 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Cat::Cat() : Animal()
 {
 	this->type = "Cat";
-	std::cout << "Animal type " << type << " spawned! Meow!\n"
+	std::cout << "Animal type " << type << " spawned! Meow!\n";
 }
 
 Cat::Cat(const Cat &other) : Animal(other)
@@ -33,3 +33,12 @@ Cat &Cat::operator=(const Cat &other)
 	return (*this);
 }
 
+Cat::~Cat()
+{
+	std::cout << "Animal type " << type << "despawned! Meow!\n";
+}
+
+void	Cat::makeSound()
+{
+	std::cout << "Meow!\n";
+}

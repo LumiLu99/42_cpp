@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:24 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 14:13:50 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/13 23:51:05 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ class Animal
 		Animal(const Animal &other);
 		Animal &operator=(const Animal &other);
 		~Animal();
-	
-	// Parameterized Constructor
-		Animal(std::string type);
+
 	// Member function
-		void    makeSound();
+		std::string	getType() const;
+		void    	makeSound();
 };
 
 #endif
