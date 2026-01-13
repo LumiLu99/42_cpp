@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 22:43:40 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 13:57:05 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/13 14:39:48 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,11 @@ DiamondTrap::DiamondTrap()
 // Copy constructor
 DiamondTrap::DiamondTrap(const DiamondTrap &other)
 	: ClapTrap(other),
-	ScavTrap(other), 
+	ScavTrap(other),
 	FragTrap(other)
 {
 	this->_name = other._name;
-	this->_hitPoints = other._hitPoints;
-	this->_energyPoints = other._energyPoints;
-	this->_attackDamage = other._attackDamage;
-	std::cout << "Copy constructor called. DiamondTrap " << _name << " spawned!" << "\n";
+	std::cout << "Copy constructor called. DiamondTrap " << _name << " spawned!\n";
 }
 
 // Copy Assignment operator
