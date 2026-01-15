@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 13:23:06 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 23:51:01 by yelu             ###   ########.fr       */
+/*   Created: 2026/01/13 13:23:08 by yelu              #+#    #+#             */
+/*   Updated: 2026/01/14 16:42:35 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Dog.hpp"
 
-Cat::Cat() : Animal()
+Dog::Dog() : Animal()
 {
-	this->type = "Cat";
-	std::cout << "Animal type " << type << " spawned! Meow!\n";
+	this->type = "Dog";
+	std::cout << "Animal type " << type << " spawned!\n";
 }
 
-Cat::Cat(const Cat &other) : Animal(other)
+Dog::Dog(const Dog &other) : Animal(other)
 {
-	std::cout << "Copy constructor called. Type " << type << " spawned!\n";
+	std::cout << "Copy constructor called. Animal type " << type << " spawned!\n";
 }
 
-Cat &Cat::operator=(const Cat &other)
+Dog &Dog::operator=(const Dog &other)
 {
 	if (this != &other)
 	{
 		Animal::operator=(other);
 	}
-	std::cout << "Copy assignment operator called.\n I am now type " << type << ".\n";
+	std::cout << "Copy assignment operator called. Animal type " << type << " spawned!\n";
 	return (*this);
 }
 
-Cat::~Cat()
+Dog::~Dog()
 {
-	std::cout << "Animal type " << type << "despawned! Meow!\n";
+	std::cout << "Animal type " << type << " despawned!\n";
 }
 
-void	Cat::makeSound()
+void Dog::makeSound() const
 {
-	std::cout << "Meow!\n";
+	std::cout << "Bark!\n";
 }

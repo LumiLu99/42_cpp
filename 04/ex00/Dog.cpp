@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:08 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 23:21:38 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/14 16:42:35 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 Dog::Dog() : Animal()
 {
 	this->type = "Dog";
-	std::cout << "Animal type " << type << " spawned! Bark!\n";
+	std::cout << "Animal type " << type << " spawned!\n";
 }
 
 Dog::Dog(const Dog &other) : Animal(other)
 {
-	std::cout << "Copy constructor called. Animal type " << type << " spawned! Bark!\n";
+	std::cout << "Copy constructor called. Animal type " << type << " spawned!\n";
 }
 
 Dog &Dog::operator=(const Dog &other)
@@ -29,7 +29,8 @@ Dog &Dog::operator=(const Dog &other)
 	{
 		Animal::operator=(other);
 	}
-	std::cout << "Copy assignment operator called. Animal type " << type << " spawned! Bark!\n";
+	std::cout << "Copy assignment operator called. Animal type " << type << " spawned!\n";
+	return (*this);
 }
 
 Dog::~Dog()
@@ -37,7 +38,7 @@ Dog::~Dog()
 	std::cout << "Animal type " << type << " despawned!\n";
 }
 
-void Dog::makeSound()
+void Dog::makeSound() const
 {
 	std::cout << "Bark!\n";
 }

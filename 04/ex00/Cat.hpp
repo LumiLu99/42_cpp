@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:04 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 23:39:35 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/14 17:53:44 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ class Cat : public Animal
 		Cat(const Cat &other);
 		Cat &operator=(const Cat &other);
 		~Cat();
-		// Parameterized constructor
-		Cat(std::string &type);
 		// Member function
-		void    makeSound();
+		void    makeSound() const;
 };
 
 #endif

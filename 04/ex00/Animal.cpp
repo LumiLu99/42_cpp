@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:26 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 23:51:13 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/15 13:22:17 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // OCF
 Animal::Animal() : type("Default")
 {
-	std::cout << "Animal type " << type << " spawned!\n";
+	std::cout << "Animal default spawned!\n";
 }
 
 Animal::Animal(const Animal &other)
@@ -36,11 +36,17 @@ Animal &Animal::operator=(const Animal &other)
 
 Animal::~Animal()
 {
-	std::cout << "Animal type " << type << "destructor called.\n";
+	std::cout << "Animal type default despawned.\n";
+}
+
+// Getter
+std::string	Animal::getType() const
+{
+	return (type);
 }
 
 // Actions
-void    Animal::makeSound()
+void    Animal::makeSound() const
 {
 	std::cout << "ANIMMMAAAALLLLL\n";
 }

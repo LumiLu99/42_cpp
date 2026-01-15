@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 13:23:10 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/13 23:35:05 by yelu             ###   ########.fr       */
+/*   Created: 2026/01/15 14:09:34 by yelu              #+#    #+#             */
+/*   Updated: 2026/01/15 14:12:32 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
-#include "Animal.hpp"
-
-class Dog : public Animal
+class Brain
 {
-	public:
-		// OCF
-		Dog();
-		Dog(const Dog &other);
-		Dog &operator=(const Dog &other);
-		~Dog();
-		// Member function
-		void    makeSound();
-};
+	
+}
 
 #endif
