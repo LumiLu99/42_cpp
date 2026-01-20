@@ -6,16 +6,18 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:06 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/15 12:48:42 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/20 18:44:02 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
+#include "Brain.hpp"
 
 Cat::Cat() : Animal()
 {
-	this->type = "Cat";
-	std::cout << "Animal type " << type << " spawned!\n";
+	brain = new Brain();
+	type = "Cat";
+	std::cout << "Animal type " << type << " with ideas spawned!\n";
 }
 
 Cat::Cat(const Cat &other) : Animal(other)
@@ -35,10 +37,16 @@ Cat &Cat::operator=(const Cat &other)
 
 Cat::~Cat()
 {
-	std::cout << "Animal type " << type << " despawned!\n";
+	delete brain;
+	std::cout << "Animal type " << type << " and its brain despawned!\n";
 }
 
 void	Cat::makeSound() const
 {
 	std::cout << "Meow!\n";
+}
+
+std::string	Cat::getIdea(int index) const
+{
+	return (brain->getIdea(index));
 }

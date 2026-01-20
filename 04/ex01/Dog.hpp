@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:10 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/14 17:53:38 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/16 17:29:25 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 #define DOG_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog : public Animal
 {
+	private:
+		Brain *brain;
 	public:
 		// OCF
 		Dog();

@@ -6,16 +6,18 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:08 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/14 16:42:35 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/20 15:59:36 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
+#include "Brain.hpp"
 
 Dog::Dog() : Animal()
 {
-	this->type = "Dog";
-	std::cout << "Animal type " << type << " spawned!\n";
+	brain = new Brain();
+	type = "Dog";
+	std::cout << "Animal type " << type << " spawned with ideas!\n";
 }
 
 Dog::Dog(const Dog &other) : Animal(other)
@@ -35,10 +37,16 @@ Dog &Dog::operator=(const Dog &other)
 
 Dog::~Dog()
 {
-	std::cout << "Animal type " << type << " despawned!\n";
+	delete brain;
+	std::cout << "Animal type " << type << " and its brain despawned!\n";
 }
 
 void Dog::makeSound() const
 {
 	std::cout << "Bark!\n";
+}
+
+std::string	Dog::getIdea(int index) const
+{
+
 }
