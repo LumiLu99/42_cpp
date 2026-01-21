@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:24 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/15 13:45:17 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/21 15:34:11 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class Animal
 {
 	protected:
-		std::string type;
+		std::string		type;
 	public:
 	// OCF
 		Animal();
@@ -27,8 +27,8 @@ class Animal
 		virtual ~Animal();
 
 	// Member function
-		std::string	getType() const;
-		virtual void    	makeSound() const;
+		std::string		getType() const;
+		virtual void	makeSound() const;
 };
 
 #endif

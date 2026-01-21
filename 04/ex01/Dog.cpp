@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:08 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/20 15:59:36 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/21 18:33:35 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ Dog::Dog() : Animal()
 {
 	brain = new Brain();
 	type = "Dog";
-	std::cout << "Animal type " << type << " spawned with ideas!\n";
+	std::cout << "Dog class: Animal type " << type << " spawned with ideas!\n";
 }
 
 Dog::Dog(const Dog &other) : Animal(other)
 {
-	std::cout << "Copy constructor called. Animal type " << type << " spawned!\n";
+	this->brain = new Brain(*other.brain);
+	std::cout << " Dog class: Copy constructor called. Animal type " << type << " with ideas spawned!\n";
 }
 
 Dog &Dog::operator=(const Dog &other)
@@ -30,15 +31,16 @@ Dog &Dog::operator=(const Dog &other)
 	if (this != &other)
 	{
 		Animal::operator=(other);
+		*this->brain = *other.brain;
 	}
-	std::cout << "Copy assignment operator called. Animal type " << type << " spawned!\n";
+	std::cout << "Dog class: Copy assignment operator called. Animal type " << type << " spawned!\n";
 	return (*this);
 }
 
 Dog::~Dog()
 {
 	delete brain;
-	std::cout << "Animal type " << type << " and its brain despawned!\n";
+	std::cout << "Dog class: Animal type " << type << " and its brain despawned!\n";
 }
 
 void Dog::makeSound() const
@@ -48,5 +50,10 @@ void Dog::makeSound() const
 
 std::string	Dog::getIdea(int index) const
 {
+	return (brain->getIdea(index));
+}
 
+void	Dog::setIdea(int const index ,std::string const idea)
+{
+	this->brain->setIdea(index, idea);
 }

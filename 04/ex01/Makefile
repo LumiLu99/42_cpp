@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2026/01/15 12:16:40 by yelu             ###   ########.fr        #
+#    Updated: 2026/01/21 16:20:48 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,10 @@ RM = rm -rf
 
 # Source files
 SRC = main.cpp \
-	   Animal.cpp	\
-	   Dog.cpp	\
-	   Cat.cpp	\
-	   WrongAnimal.cpp	\
-	   WrongCat.cpp
+		Animal.cpp	\
+		Dog.cpp	\
+		Cat.cpp	\
+		Brain.cpp
 
 # Build rules
 all: $(NAME)

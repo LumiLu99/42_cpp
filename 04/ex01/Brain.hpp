@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 14:09:34 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/20 18:41:27 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/21 16:18:40 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ class Brain
 		~Brain();
 
 	// Getter and setter
-	 	std::string getIdea(int index) const;	
+	 	std::string 	getIdea(int index) const;
+		void			setIdea(int const index, std::string const idea);	
 };
 
 #endif

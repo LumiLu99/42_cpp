@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:23:10 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/16 17:29:25 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/21 16:18:33 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ class Dog : public Animal
 		Dog &operator=(const Dog &other);
 		~Dog();
 		// Member function
-		void    makeSound() const;
+		void			makeSound() const;
+		std::string		getIdea(int index) const;
+		void			setIdea(int const index, std::string const idea);
+
 };
 
 #endif
