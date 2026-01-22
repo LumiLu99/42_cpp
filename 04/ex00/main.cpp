@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:32 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/21 17:50:35 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/22 16:27:26 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int main()
 	// }
 
 	// {
-	// 	const Animal* meta = new Animal();
-	// 	const Animal* j = new Dog();
-	// 	const Animal* i = new Cat();
+		// const Animal* meta = new Animal();
+		// const Animal* j = new Dog();
+		// const Animal* i = new Cat();
 	// 	Dog *A = new Dog();
 	// 	A->makeSound();
 	// 	std::cout << j->getType() << " " << std::endl;
