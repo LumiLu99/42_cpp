@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:09:19 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/23 15:48:36 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/25 16:58:16 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define AMATERIA_HPP
 
 #include <iostream>
+
+class ICharacter;
 
 class AMateria
 {

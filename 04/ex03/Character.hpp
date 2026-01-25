@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:49:01 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/24 15:06:58 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/25 17:30:23 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
 
-class Character
+class Character : public ICharacter
 {
 	protected:
 		std::string _name;
@@ -28,6 +28,8 @@ class Character
 		Character(const Character &other);
 		Character &operator=(const Character &other);
 		~Character();
+	
+		void getName() const;
 };
 
 #endif
