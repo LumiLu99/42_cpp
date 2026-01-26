@@ -6,12 +6,16 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 06:44:11 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/23 06:52:13 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/25 17:00:44 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 #define ICHARACTER_HPP
+
+#include <string>
+
+class AMateria;
 
 class ICharacter
 {
