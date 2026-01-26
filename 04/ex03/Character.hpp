@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:49:01 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/25 17:30:23 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/26 15:54:10 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ class Character : public ICharacter
 		Character &operator=(const Character &other);
 		~Character();
 	
-		void getName() const;
+		Character(const std::string &name);
+
+		void equip(AMateria *m);
+		void unequip(int idx);
+		void use(int idx, ICharacter &target);
+
+		const std::string& getName() const;
 };
 
 #endif

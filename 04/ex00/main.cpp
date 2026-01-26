@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:32 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/22 16:27:26 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/26 16:29:35 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main()
 	// 	const WrongAnimal* meta = new WrongAnimal();
 	// 	const WrongAnimal* i = new WrongCat();
 	// 	std::cout << i->getType() << " " << std::endl;
-	// 	i->makeSound(); //will output the cat sound?
+	// 	i->makeSound(); // wrong sound here
 	// 	meta->makeSound();
 	// 	delete i;
 	// 	delete meta;

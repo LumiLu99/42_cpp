@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:09:21 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/23 06:43:30 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/26 17:52:56 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ AMateria::~AMateria()
 	std::cout << "AMateria destructed!\n";
 }
 
-AMateria::AMateria(std::string const &type)
+AMateria::AMateria(std::string const &type) : _type(type)
 {
-	this->_type = _type;
 	std::cout << "AMateria (parameterized constructor): " << _type << " type constructed\n";
 }
 

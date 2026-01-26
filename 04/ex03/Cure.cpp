@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:29:44 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/25 17:11:00 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/26 16:54:53 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ Cure::~Cure()
 	std::cout << "Cure Materia destroyed!\n";
 }
 
-// AMateria *Cure::clone() const
-// {
-// 	return new Cure(*this);
-// }
+AMateria *Cure::clone() const
+{
+	return (new Cure(*this));
+}
 
 void Cure::use(ICharacter &target)
 {

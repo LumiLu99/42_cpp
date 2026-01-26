@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 06:59:10 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/26 15:14:07 by yelu             ###   ########.fr       */
+/*   Created: 2026/01/26 14:31:49 by yelu              #+#    #+#             */
+/*   Updated: 2026/01/26 14:44:48 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IMATERIA_HPP
-#define IMATERIA_HPP
+#ifndef MATERIA_SOURCE_HPP
+#define MATERIA_SOURCE_HPP
 
-#include <string>
+#include "IMateriaSource.hpp"
+#include "AMateria.hpp"
 
-class AMateria;
-
-class IMateriaSource
+class MateriaSource : public IMateriaSource
 {
+	private:
+		AMateria* _inventory[4];
 	public:
-	virtual ~IMateriaSource() {}
-	virtual void learnMateria(AMateria*) = 0;
-	virtual AMateria* createMateria(std::string const & type) = 0;
+		MateriaSource();
+		MateriaSource(const MateriaSource &other);
+		MateriaSource &operator=(const MateriaSource &other);
+		~MateriaSource();
+
+		void learnMateria(AMateria* m);
+		AMateria* createMateria(std::string const & type);
 };
 
 #endif

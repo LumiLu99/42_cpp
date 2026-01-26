@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:09:19 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/25 16:58:16 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/26 17:49:40 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class AMateria
 		AMateria();
 		AMateria(const AMateria &other);
 		AMateria &operator=(const AMateria &other);
-		~AMateria();
+		virtual ~AMateria();
 
 		AMateria(std::string const &type);
 		std::string const &getType() const;
