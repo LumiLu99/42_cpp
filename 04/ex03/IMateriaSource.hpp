@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 06:59:10 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/24 22:14:49 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/27 14:34:10 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ class AMateria;
 class IMateriaSource
 {
 	public:
-		virtual ~IMateriaSource() {}
-		virtual void learnMateria(AMateria*) = 0;
-		virtual AMateria* createMateria(std::string const & type) = 0;
+	virtual ~IMateriaSource() {}
+	virtual void learnMateria(AMateria*) = 0;
+	virtual AMateria* createMateria(std::string const & type) = 0;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:29:41 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/26 11:58:58 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/27 14:33:28 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CURE_MATERIA_HPP
 
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 class Cure : public AMateria
 {
