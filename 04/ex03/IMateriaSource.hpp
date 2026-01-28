@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 06:59:10 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/27 14:34:10 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/27 23:19:05 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define IMATERIA_HPP
 
 #include <string>
+#include <iostream>
 
 class AMateria;
 

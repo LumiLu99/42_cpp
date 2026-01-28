@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:49:01 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/26 15:54:10 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/27 17:25:54 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 
 class Character : public ICharacter
 {
-	protected:
+	private:
 		std::string _name;
 		AMateria *_inventory[4];
+		AMateria *_floor[100];
 
 	public:
 		Character();
