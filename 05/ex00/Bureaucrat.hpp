@@ -14,12 +14,13 @@
 #define BUREAUCRAT_HPP
 
 #include <iostream>
+#include <exception>
 
 class Bureaucrat
 {
 	private:
 		std::string	_name;
-		int			grade;
+		int			_grade;
 
 	public:
 		Bureaucrat();
@@ -32,8 +33,25 @@ class Bureaucrat
 		const std::string &getName() const;
 		const int &getGrade() const;
 
-		GradeTooHighException();
-		GradeTooLowException();
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw()
+				{
+					return ("Grade is too high. Enter a grade between 1 and 150.");
+				}
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw()
+				{
+					return ("Grade is too low. Enter a grade between 1 and 150.");
+				}
+		};
 };
+
+std::ostream &operator<<(std::ostream &out, const Bureaucrat &src);
 
 #endif

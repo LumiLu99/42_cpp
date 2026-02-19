@@ -6,11 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2026/01/26 17:53:13 by yelu             ###   ########.fr        #
-=======
 #    Updated: 2026/02/12 22:37:56 by yelu             ###   ########.fr        #
->>>>>>> 71880470b6f86c603bed5b0519a37fb6c0935529
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +19,7 @@ PINK 	=	\033[35m
 RESET	=	\033[0m
 
 # Program name
-NAME = Materia
+NAME = Bureaucrat
 
 # Directories
 SRC_DIR = src
@@ -35,15 +31,7 @@ RM = rm -rf
 
 # Source files
 SRC = main.cpp \
-<<<<<<< HEAD
-		Character.cpp	\
-		MateriaSource.cpp \
-		AMateria.cpp \
-		Ice.cpp \
-		Cure.cpp
-=======
 		Bureaucrat.cpp
->>>>>>> 71880470b6f86c603bed5b0519a37fb6c0935529
 
 # Build rules
 all: $(NAME)
