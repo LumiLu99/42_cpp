@@ -22,7 +22,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 	this->_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other) :\
+Bureaucrat::Bureaucrat(const Bureaucrat &other) :
 	_name(other._name),
 	_grade(other._grade)
 {
@@ -75,17 +75,17 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &src)
 	out << "--- [Personnel File] ---\n";
 	out << "Name: " << src.getName() << "\n";
 	out << "Rank: " << src.getGrade() << "\n";
-	out << "Status: 新年快乐🎉，年年有鱼🐟";
+	out << "Status: 做牛做马🐎";
 	return (out);
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("Grade is too high. Enter a grade between 1 and 150.");
+	return ("Grade is too high for Bureacrat. Enter a grade between 1 and 150.");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("Grade is too low. Enter a grade between 1 and 150.");
+	return ("Grade is too low for Bureacrat. Enter a grade between 1 and 150.");
 }
 

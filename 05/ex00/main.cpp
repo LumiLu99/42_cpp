@@ -63,4 +63,35 @@ int main()
 			std::cerr << "Error: " << error.what() << " \n";
 		}
 	}
+
+	{
+		std::cout << "\n=== Test copy constructor ===\n";
+		try
+		{
+			Bureaucrat bob("Second Bob", 67);
+			Bureaucrat copyBob(bob);
+			copyBob.PromoteGrade();
+			std::cout << bob << "\n";
+			std::cout << copyBob << "\n";
+		}
+		catch (const std::exception &error)
+		{
+			std::cerr << "Error: " << error.what() << " \n";
+		}
+	}
+
+	{
+		std::cout << "\n=== Test limit of grade promotion ===\n";
+		try
+		{
+			Bureaucrat maxGrade("Super of the super boss", 1);
+			std::cout << maxGrade << "\n";
+			std::cout << "Attempting to promote grade...\n";
+			maxGrade.PromoteGrade();
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+	}
 }
