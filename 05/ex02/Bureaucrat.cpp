@@ -89,3 +89,15 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 	return ("Grade is too low for Bureacrat. Enter a grade between 1 and 150.");
 }
 
+void Bureaucrat::executeForm(AForm const &form) const
+{
+	try
+	{
+		
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
+}
