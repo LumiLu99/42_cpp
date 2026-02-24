@@ -11,23 +11,33 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
 	{
-		std::cout << "\n== Can Grade 75 Bob sign form 50 grade? ==\n";
-		Bureaucrat bob("Bob", 75);
-		Form form("Form A", 50, 25);
+		std::cout << "\n== Can Grade 145 Bob sign form 145 grade? ==\n";
+		Bureaucrat bob("Bob", 145);
+		ShrubberyCreationForm form("bush");
 		form.signForm(bob);
 		std::cout << form.getName() << " is signed: " << std::boolalpha << form.getIsSigned() << "\n";
+		bob.executeForm(form);
 	}
-
 	{
-		std::cout << "\n== Can Grade 75 Bob sign form 100 grade? ==\n";
-		Bureaucrat bob("Bob", 75);
-		Form form("GongXiFaCai", 100, 25);
+		std::cout << "\n== Can Grade 134 Bob sign form 135 grade? ==\n";
+		Bureaucrat bob("Bob", 134);
+		ShrubberyCreationForm form("bush");
 		form.signForm(bob);
 		std::cout << form.getName() << " is signed: " << std::boolalpha << form.getIsSigned() << "\n";
+		bob.executeForm(form);
+	}
+	{
+		std::cout << "\n== Can Grade 150 Bob sign form 145 grade? ==\n";
+		Bureaucrat bob("Bob", 150);
+		ShrubberyCreationForm form("bush");
+		form.signForm(bob);
+		std::cout << form.getName() << " is signed: " << std::boolalpha << form.getIsSigned() << "\n";
+		bob.executeForm(form);
 	}
 }

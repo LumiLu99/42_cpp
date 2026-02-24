@@ -16,6 +16,7 @@
 #include "AForm.hpp"
 #include <iostream>
 #include <fstream>
+#include "Bureaucrat.hpp"
 
 class ShrubberyCreationForm : public AForm
 {
@@ -27,6 +28,8 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm(const ShrubberyCreationForm &other);
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 		~ShrubberyCreationForm();
+
+		const std::string &getTarget() const;
 
 		void execute(const Bureaucrat &executor) const;
 };

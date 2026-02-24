@@ -32,7 +32,8 @@ RM = rm -rf
 # Source files
 SRC = main.cpp \
 		Bureaucrat.cpp	\
-		Form.cpp
+		AForm.cpp \
+		ShrubberyCreationForm.cpp
 
 # Build rules
 all: $(NAME)

@@ -13,48 +13,54 @@
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
-    : AForm("Shrubbery Creation Form", 145, 137), _target(target)
+	: AForm("Shrubbery Creation Form", 145, 137), _target(target)
 {
-    // std::cout << "ShrubberyCreationForm constructor called" << "\n";
+	// std::cout << "ShrubberyCreationForm constructor called" << "\n";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
-    : AForm(other), _target(other._target)
+	: AForm(other), _target(other._target)
 {
-    // std::cout << "ShrubberyCreationForm copy constructor called" << "\n";
+	// std::cout << "ShrubberyCreationForm copy constructor called" << "\n";
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
-    // std::cout << "ShrubberyCreationForm copy assignment operator called" << "\n";
-    if (this != &other)
-    {
-        AForm::operator=(other);
-        _target = other._target;
-    }
-    return (*this);
+	// std::cout << "ShrubberyCreationForm copy assignment operator called" << "\n";
+	if (this != &other)
+	{
+		AForm::operator=(other);
+		_target = other._target;
+	}
+	return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-    // std::cout << "ShrubberyCreationForm destructor called" << "\n";
+	// std::cout << "ShrubberyCreationForm destructor called" << "\n";
 }
 
 void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
-    if (!getIsSigned())
-        throw AForm::GradeTooLowException();
-    else if (executor.getGrade() > getGradeToExecute())
-        throw AForm::GradeTooLowException();
+	if (!getIsSigned())
+		throw AForm::FormNotSignedException();
+	else if (executor.getGrade() > getGradeToExecute())
+		throw AForm::GradeTooLowException();
 
-    std::ofstream outFile(_target + "_shrubbery");
-    if (!outFile)
-    {
-        std::cerr << "Error: Could not create file." << std::endl;
-        return;
-    }
+	std::ofstream outFile((_target + "_shrubbery").c_str());
+	if (!outFile)
+	{
+		std::cerr << "Error: Could not create file." << std::endl;
+		return ;
+	}
+	outFile << "     #     " << "\n";
+	outFile << "    ###    " << "\n";
+	outFile << "   #####   " << "\n";
+	outFile << "  #######  " << "\n";
+	outFile << "    |||    " << "\n";
+}
 
-    outFile << "       _-_" << std::endl;
-    outFile << "    /~~   ~~\\" << std::endl;
-    outFile << " /~~         ~~\\" << std::endl;
+const std::string &ShrubberyCreationForm::getTarget() const
+{
+	return (_target);
 }
