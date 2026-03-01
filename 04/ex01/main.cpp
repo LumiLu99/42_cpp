@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 13:21:32 by yelu              #+#    #+#             */
-/*   Updated: 2026/01/27 23:11:26 by yelu             ###   ########.fr       */
+/*   Updated: 2026/01/29 17:14:51 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,43 @@ int main()
 	// 	delete dog2;
 	// }
 	
+	// {
+	// 	const Animal *animals[10];
+	// 	for (int i = 0; i < 5; i++)
+	// 	{
+	// 		std::cout << "New dog[" << i << "]\n";
+	// 		animals[i] = new Dog();
+	// 	}
+	// 	for (int i = 5; i < 10; i++)
+	// 	{
+	// 		std::cout << "New cat[" << i << "]\n";
+	// 		animals[i] = new Cat();
+	// 	}
+	// 	for (int i = 0; i < 10; i++)
+	// 	{
+	// 		std::cout << "Deleteing animal array [" << i << "]\n";
+	// 		delete animals[i];
+	// 	}
+	// }
+
+	// Dog *basic = new Dog();
+	// basic->setIdea(0, "Hehe");
+	// std::cout << basic->getIdea(0) << " \n";
+	// Dog *tmp = new Dog();
+	// tmp = basic;
+	// delete basic;
+	// std::cout << tmp->getIdea(0) << " \n";
+	// return 0;
+
+	Dog basic;
+	basic.setIdea(0, "Hehe\n");
 	{
-		const Animal *animals[10];
-		for (int i = 0; i < 5; i++)
-		{
-			std::cout << "New dog[" << i << "]\n";
-			animals[i] = new Dog();
-		}
-		for (int i = 5; i < 10; i++)
-		{
-			std::cout << "New cat[" << i << "]\n";
-			animals[i] = new Cat();
-		}
-		for (int i = 0; i < 10; i++)
-		{
-			std::cout << "Deleteing animal array [" << i << "]\n";
-			delete animals[i];
-		}
+		Dog tmp;
+		tmp.setIdea(0, "Changed Hehe\n");
+		std::cout << "tmp idea: " << tmp.getIdea(0) << " \n";
+		std::cout << "basic idea: " << basic.getIdea(0) << " \n";
+		basic = tmp;
 	}
-	return 0;
+	std::cout << "Basic idea after tmp died: " << basic.getIdea(0) << " \n";
+	
 }
