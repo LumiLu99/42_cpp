@@ -6,12 +6,15 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:21:05 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/01 22:10:04 by yelu             ###   ########.fr       */
+/*   Updated: 2026/03/04 13:30:39 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 Intern::Intern()
 {
@@ -20,17 +23,34 @@ Intern::Intern()
 
 Intern::Intern(const Intern &other)
 {
+	(void)other;
 	// std::cout << "Intern copy constructor called!\n";
 }
 
 Intern &Intern::operator=(const Intern &other)
 {
+	(void)other;
 	return (*this);
 }
 
 Intern::~Intern()
 {
 	// std::cout << "Intern deconstructor called!\n";
+}
+
+AForm *Intern::createShrubbery(std::string title)
+{
+	return (new ShrubberyCreationForm(title));
+}
+
+AForm *Intern::createRobotomy(std::string title)
+{
+	return (new RobotomyRequestForm(title));
+}
+
+AForm *Intern::createPresidential(std::string title)
+{
+	return (new PresidentialPardonForm(title));
 }
 
 AForm *Intern::makeForm(std::string formName, std::string target)

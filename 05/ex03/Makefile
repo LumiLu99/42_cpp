@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2026/03/01 17:49:14 by yelu             ###   ########.fr        #
+#    Updated: 2026/03/04 13:30:16 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC = main.cpp \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp	\
 		RobotomyRequestForm.cpp	\
-		PresidentialPardonForm.cpp
+		PresidentialPardonForm.cpp	\
+		Intern.cpp
 
 # Build rules
 all: $(NAME)

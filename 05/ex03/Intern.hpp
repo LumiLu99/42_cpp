@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:21:08 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/01 21:54:44 by yelu             ###   ########.fr       */
+/*   Updated: 2026/03/04 13:22:46 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ class Intern
 		Intern(const Intern &other);
 		Intern &operator=(const Intern &other);
 		~Intern();
+
+		AForm *createShrubbery(std::string title);
+		AForm *createRobotomy(std::string title);
+		AForm *createPresidential(std::string title);
 
 		AForm *makeForm(std::string formName, std::string target);
 };
