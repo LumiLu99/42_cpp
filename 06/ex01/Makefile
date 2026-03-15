@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2026/03/04 13:30:16 by yelu             ###   ########.fr        #
+#    Updated: 2026/03/15 18:47:52 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ PINK 	=	\033[35m
 RESET	=	\033[0m
 
 # Program name
-NAME = Form
+NAME = serial
 
 # Directories
 SRC_DIR = src
@@ -30,13 +30,9 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf
 
 # Source files
-SRC = main.cpp \
-		Bureaucrat.cpp	\
-		AForm.cpp \
-		ShrubberyCreationForm.cpp	\
-		RobotomyRequestForm.cpp	\
-		PresidentialPardonForm.cpp	\
-		Intern.cpp
+SRC = Serialize.cpp	\
+		main.cpp	\
+		Data.cpp	\
 
 # Build rules
 all: $(NAME)

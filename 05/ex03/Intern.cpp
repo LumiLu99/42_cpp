@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:21:05 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/02 17:18:25 by yelu             ###   ########.fr       */
+/*   Updated: 2026/03/04 13:30:39 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ Intern::~Intern()
 	// std::cout << "Intern deconstructor called!\n";
 }
 
-AForm* Intern::createShrubbery(std::string target)
+AForm *Intern::createShrubbery(std::string title)
 {
-	return (new ShrubberyCreationForm(target));
+	return (new ShrubberyCreationForm(title));
 }
 
-AForm* Intern::createRobotomy(std::string target)
+AForm *Intern::createRobotomy(std::string title)
 {
-	return (new RobotomyRequestForm(target));
+	return (new RobotomyRequestForm(title));
 }
 
-AForm* Intern::createPresidential(std::string target)
+AForm *Intern::createPresidential(std::string title)
 {
-	return (new PresidentialPardonForm(target));
+	return (new PresidentialPardonForm(title));
 }
 
 AForm *Intern::makeForm(std::string formName, std::string target)
