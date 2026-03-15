@@ -6,7 +6,7 @@
 #    By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/09 00:00:25 by yelu              #+#    #+#              #
-#    Updated: 2026/03/02 15:21:57 by yelu             ###   ########.fr        #
+#    Updated: 2026/03/04 21:47:31 by yelu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ PINK 	=	\033[35m
 RESET	=	\033[0m
 
 # Program name
-NAME = Form
+NAME = convert
 
 # Directories
 SRC_DIR = src
@@ -31,12 +31,7 @@ RM = rm -rf
 
 # Source files
 SRC = main.cpp \
-		Bureaucrat.cpp	\
-		AForm.cpp \
-		ShrubberyCreationForm.cpp	\
-		RobotomyRequestForm.cpp	\
-		PresidentialPardonForm.cpp	\
-		Intern.cpp
+		ScalarConverter.cpp
 
 # Build rules
 all: $(NAME)

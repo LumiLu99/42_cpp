@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 22:56:30 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/01 22:03:39 by yelu             ###   ########.fr       */
+/*   Updated: 2026/03/02 18:51:34 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,29 @@
 
 int main()
 {
-    Intern someRandomIntern;
-    AForm* rrf;
+	Intern someRandomIntern;
+	AForm* rrf;
+	Bureaucrat trump("Trump", 1);
+	Bureaucrat bob("Bob", 150);
 
-    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-    
-    if (rrf) {
-        // Do something with the form
-        delete rrf; // Crucial! The Intern allocated this with 'new'
-    }
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	AForm *pardon = someRandomIntern.makeForm("presidential pardon", "Bob Ross");
+	
+	if (rrf) {
+		rrf->signForm(trump);
+		trump.executeForm(*rrf);
+		bob.executeForm(*rrf);
+		delete rrf;
+	}
+	if (pardon) {
+		pardon->signForm(trump);
+		trump.executeForm(*pardon);
+		bob.executeForm(*pardon);
+		delete pardon;
+	}
 
-    // Test a failure case
-    AForm* unknown = someRandomIntern.makeForm("coffee request", "Intern");
-    if (!unknown) {
-        // This will correctly handle the NULL return
-    }
+	AForm* unknown = someRandomIntern.makeForm("coffee request", "Intern");
+	if (unknown) {
+		delete unknown;
+	}
 }
