@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serialize.hpp                                      :+:      :+:    :+:   */
+/*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 15:14:50 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/15 18:43:33 by yelu             ###   ########.fr       */
+/*   Created: 2026/03/15 23:48:27 by yelu              #+#    #+#             */
+/*   Updated: 2026/03/15 23:48:46 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZATION_HPP
-#define SERIALIZATION_HPP
+#ifndef C_HPP
+#define C_HPP
 
-#include <stdint.h>
-// #include "Data.hpp"
-class Data;
+#include "Base.hpp"
 
-class Serializer
+class C : public Base
 {
-	private:
-		Serializer();
-		Serializer(const Serializer& other);
-		Serializer& operator=(const Serializer& other);
-		~Serializer();
-	public:
-		static uintptr_t	serialize(Data* ptr);
-		static Data*		deserialize(uintptr_t raw);
-
+    
 };
 
 #endif

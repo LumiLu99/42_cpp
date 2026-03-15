@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serialize.hpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 15:14:50 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/15 18:43:33 by yelu             ###   ########.fr       */
+/*   Created: 2026/03/15 23:48:59 by yelu              #+#    #+#             */
+/*   Updated: 2026/03/16 00:00:42 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZATION_HPP
-#define SERIALIZATION_HPP
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+#include <iostream>
 
-#include <stdint.h>
-// #include "Data.hpp"
-class Data;
-
-class Serializer
+Base*	generate(void)
 {
-	private:
-		Serializer();
-		Serializer(const Serializer& other);
-		Serializer& operator=(const Serializer& other);
-		~Serializer();
-	public:
-		static uintptr_t	serialize(Data* ptr);
-		static Data*		deserialize(uintptr_t raw);
+    
+}
 
-};
+void identify(Base *p)
+{
+    
+}
 
-#endif
+void identify(Base& p)
+{
+    
+}
+
