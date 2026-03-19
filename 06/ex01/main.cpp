@@ -27,7 +27,7 @@ int main()
 		std::cout << "Serialized as integer: " << raw << "\n";
 		Data* deserialized = Serializer::deserialize(raw);
 		std::cout << "Deserialized address: " << deserialized << "\n";
-	
+
 		std::cout << "Deserialized Data - Name: " << deserialized->getName() << ", X: " << deserialized->getX() << "\n";
 		std::cout << "Original Data - Name: " << test.getName() << ", X: " << test.getX() << "\n";
 	}

@@ -65,6 +65,6 @@ int main()
 	}
 	else if (!unknown)
 	{
-		std::cout << "This should print. Unknown form type requested and cannot be created.\n";
+		std::cout << "Coffee request is NULL.\n";
 	}
 }

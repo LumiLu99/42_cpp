@@ -27,15 +27,11 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 
 ScalarConverter::~ScalarConverter() {}
 
-void ScalarConverter::printChar(const std::string& argv, double value, bool isSpecial)
+void ScalarConverter::printChar(double value, bool isSpecial)
 {
-	bool isChar = (argv.length() == 1 && !std::isdigit(argv[0]));
-
 	std::cout << "char: ";
 	if (isSpecial || value < 0 || value > 127)
 		std::cout << "impossible" << std::endl;
-	else if (isChar)
-		std::cout << "'" << argv[0] << "'" << std::endl;
 	else if (std::isprint(static_cast<char>(value)))
 		std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
 	else
@@ -79,12 +75,21 @@ void ScalarConverter::printDouble(double value)
 
 void ScalarConverter::convert(const std::string& argv)
 {
-	char *end;
-	double value = std::strtod(argv.c_str(), &end);
+	double	value;
+	char	*end;
+	bool	isSpecial;
 
-	bool isSpecial = std::isnan(value) || std::isinf(value);
+	if (argv.length() == 1 && !std::isdigit(argv[0]))
+	{
+		value = static_cast<double>(argv[0]);
+	}
+	else
+	{
+		value = std::strtod(argv.c_str(), &end);
+		isSpecial = std::isnan(value) || std::isinf(value);
+	}
 
-	printChar(argv, value, isSpecial);
+	printChar(value, isSpecial);
 	printInt(value, isSpecial);
 	printFloat(value);
 	printDouble(value);

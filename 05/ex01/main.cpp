@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 22:56:30 by yelu              #+#    #+#             */
-/*   Updated: 2026/02/12 22:58:21 by yelu             ###   ########.fr       */
+/*   Updated: 2026/03/17 18:06:28 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main()
 		Bureaucrat bob("Bob", 75);
 		Form form("Form A", 50, 25);
 		form.signForm(bob);
+		std::cout << form << " \n";
 		std::cout << form.getName() << " is signed: " << std::boolalpha << form.getIsSigned() << "\n";
 	}
 
@@ -28,6 +29,7 @@ int main()
 		Bureaucrat bob("Bob", 75);
 		Form form("GongXiFaCai", 100, 25);
 		form.signForm(bob);
+		std::cout << form << " \n";
 		std::cout << form.getName() << " is signed: " << std::boolalpha << form.getIsSigned() << "\n";
 	}
 }

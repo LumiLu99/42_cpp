@@ -19,7 +19,7 @@ PINK 	=	\033[35m
 RESET	=	\033[0m
 
 # Program name
-NAME = base
+NAME = whatever
 
 # Directories
 SRC_DIR = src
@@ -30,7 +30,7 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf
 
 # Source files
-SRC = A.cpp B.cpp C.cpp Base.cpp main.cpp
+SRC = main.cpp
 
 # Build rules
 all: $(NAME)
