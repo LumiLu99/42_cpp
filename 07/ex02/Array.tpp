@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/18 22:15:27 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/19 21:25:16 by yelu             ###   ########.fr       */
+/*   Created: 2026/03/19 21:33:50 by yelu              #+#    #+#             */
+/*   Updated: 2026/03/19 21:37:37 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-#define ITER_HPP
-
 #include <iostream>
 
-template <typename T, typename F>
-void iter(T *address,  const size_t length, F function)
+template <typename T>
+void Array()
 {
-    if (!address || !function)
-        return ;
-    for (size_t i = 0; i < length; i++)
-        function(address[i]);
+	
 }
-
-#endif

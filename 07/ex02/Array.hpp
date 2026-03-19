@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/18 22:15:27 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/19 21:25:16 by yelu             ###   ########.fr       */
+/*   Created: 2026/03/19 21:33:00 by yelu              #+#    #+#             */
+/*   Updated: 2026/03/19 21:57:14 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-#define ITER_HPP
+#ifndef ARRAY_HPP
+#define ARRAY_HPP
 
-#include <iostream>
-
-template <typename T, typename F>
-void iter(T *address,  const size_t length, F function)
+template <typename T>
+class Array
 {
-    if (!address || !function)
-        return ;
-    for (size_t i = 0; i < length; i++)
-        function(address[i]);
-}
+	Array();
+	Array(unsigned int n);
+	Array()
+};
+
+
+#include "Array.tpp"
 
 #endif
