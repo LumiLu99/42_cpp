@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:21:39 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/15 17:06:06 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/15 15:47:31 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ class Data
 
 		void	setName(const std::string name);
 		void	setX(const int x);
-		const std::string&	getName() const;
-		int getX() const;
+		const	std::string&	getName() const;
+		int		getX() const;
 };
 
 #endif
