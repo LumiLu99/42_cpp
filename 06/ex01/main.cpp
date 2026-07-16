@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:35:18 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/15 17:19:24 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/15 15:22:19 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,30 @@ int main()
 		std::cout << "Original Data - Name: " << test.getName() << ", X: " << test.getX() << "\n";
 	}
 
-	{
-		std::cout << "\n### For fun ###\n";
-		char static_str[] = "Hello";
-		char *heap_str = new char[10];
-		static const char *read_only = "Hello";
+	// {
+	// 	int* p = new int(65);
+	// 	char* ch = reinterpret_cast<char*>(p);
+	// 	std::cout << *p << "\n";
+	// 	std::cout << *ch << "\n";
+	// 	std::cout << p << "\n";
+	// 	std::cout << ch << "\n";
+	// 	delete p;
+	// }
 
-		std::cout << "Stack: " << (uintptr_t)static_str << "\n";
-		std::cout << "Heap:  " << (uintptr_t)heap_str << "\n";
-		std::cout << "Data:  " << (uintptr_t)read_only << "\n";
-		std::cout << "Stack: " << &static_str << "\n";
-		std::cout << "Heap:  " << &heap_str << "\n";
-		std::cout << "Data:  " << &read_only << "\n";
-		delete[] heap_str;
-		// Stack grows downwards, heap grows upwards, data segment is usually in the middle. Addresses may vary based on the system and compiler optimizations.
-	}
+	// {
+	// 	std::cout << "\n### For fun ###\n";
+	// 	char static_str[] = "Hello"; // stack array
+	// 	char *heap_str = new char[10]; // heap allocation
+	// 	static const char *read_only = "Hello";
+
+	// 	std::cout << "Stack: " << (uintptr_t)static_str << "\n"; // address of stack array
+	// 	std::cout << "Heap:  " << (uintptr_t)heap_str << "\n"; // address of heap allocation
+	// 	std::cout << "Read only:  " << (uintptr_t)read_only << "\n"; // address of string literal
+	// 	std::cout << "Stack: " << &static_str << "\n"; // address of the array object (same numeric address as static_str)
+	// 	std::cout << "Heap:  " << &heap_str << "\n"; // address of pointer variable (on the stack)
+	// 	std::cout << "Read only:  " << &read_only << "\n"; // address of the static pointer variable (in .data), not the string literals
+	// 	delete[] heap_str;
+	// 	// Stack grows downwards, heap grows upwards, data segment is usually in the middle. Addresses may vary based on the system and compiler optimizations.
+	// 	// Their exact locations are operating system dependent
+	// }
 }

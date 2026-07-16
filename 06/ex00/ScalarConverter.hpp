@@ -27,10 +27,10 @@ class ScalarConverter
 		ScalarConverter& operator=(const ScalarConverter& other);
 		~ScalarConverter();
 
-		static void printChar(double value, bool isSpecial);
-		static void printInt(double value, bool isSpecial);
-		static void printFloat(double value);
-		static void printDouble(double value);
+		static void printChar(double value, bool isSpecial, bool isImpossible);
+		static void printInt(double value, bool isSpecial, bool isImpossible);
+		static void printFloat(double value, bool isImpossible);
+		static void printDouble(double value, bool isImpossible);
 
 	public:
 		static void convert(const std::string& argv);
