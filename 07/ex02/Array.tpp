@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 21:33:50 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/20 02:52:42 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/24 16:03:26 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ Array<T>& Array<T>::operator=(const Array& other)
 }
 
 template <typename T>
+unsigned int Array<T>::size() const
+{
+	return (_size);
+}
+
+template <typename T>
 Array<T>::~Array()
 {
 	if (this->_arr)
@@ -73,7 +79,7 @@ T& Array<T>::operator[](unsigned int index)
 template <typename T>
 const T& Array<T>::operator[](unsigned int index) const
 {
-	if (index >= size)
+	if (index >= _size)
 		throw Array<T>::OutOfBoundsException();
 	return _arr[index];
 }
