@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 14:26:37 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/24 01:27:18 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/25 17:10:15 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int main()
 	return 0;
 
 	{
-		int main() {
 		Span sp(10000);
 		std::vector<int> randomNums(10000);
 		
@@ -38,6 +37,5 @@ int main()
 
 		std::cout << "Shortest: " << sp.shortestSpan() << std::endl; // Should be 1
 		std::cout << "Longest: " << sp.longestSpan() << std::endl;   // Should be 9999
-}
 	}
 }
