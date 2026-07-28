@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 14:26:41 by yelu              #+#    #+#             */
-/*   Updated: 2026/03/24 00:10:31 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/28 11:39:40 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class Span
 		void addNumber(unsigned int number);
 		unsigned int longestSpan() const;
 		unsigned int shortestSpan() const;
-		
+
 		class SpanFullException : public std::exception
 		{
 			const char *what() const throw();
@@ -55,6 +55,6 @@ class Span
 				_vec.insert(_vec.end(), begin, end);
 		}
 };
-	
+
 
 #endif
