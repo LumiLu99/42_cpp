@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 14:26:41 by yelu              #+#    #+#             */
-/*   Updated: 2026/07/28 11:40:08 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/28 11:43:22 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <climits>
 
 class Span
 {
@@ -30,7 +31,7 @@ class Span
 		Span& operator=(const Span &other);
 		~Span();
 
-		void addNumber(unsigned int number);
+		void addNumber(int number);
 		unsigned int longestSpan() const;
 		unsigned int shortestSpan() const;
 
@@ -47,9 +48,9 @@ class Span
 		template <typename T>
 		void addNumber(T begin, T end)
 		{
-			unsigned int range = std::distance(begin, end);
+			unsigned int dist = std::distance(begin, end);
 			
-			if (_vec.size() + distance > _N)
+			if (_vec.size() + dist > _N)
 				throw SpanFullException();
 			else
 				_vec.insert(_vec.end(), begin, end);

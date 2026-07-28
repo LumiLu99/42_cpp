@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 14:26:39 by yelu              #+#    #+#             */
-/*   Updated: 2026/07/25 19:08:06 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/27 23:39:00 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Span& Span::operator=(const Span &other)
 
 Span::~Span() {}
 
-void Span::addNumber(unsigned int number)
+void Span::addNumber(int number)
 {
 	if (_vec.size() >= _N)
 		throw Span::SpanFullException();
@@ -51,20 +51,30 @@ unsigned int Span::longestSpan() const
 unsigned int Span::shortestSpan() const
 {
 	if (_vec.size() < 2)
-		throw Span::NotEnoughNumbersException();
-
+		throw NotEnoughNumbersException();
+	
+	unsigned int minSpan = UINT_MAX;
+	
 	std::vector<int> sorted = _vec;
 	std::sort(sorted.begin(), sorted.end());
-
-	return (static_cast<unsigned int>(sorted[1] - sorted[0]));
+	
+	for (size_t i = 0; i < sorted.size() - 1; ++i)
+	{
+		unsigned int currentSpan = static_cast<unsigned int>(sorted[i+1] - sorted[i]);
+		if (currentSpan < minSpan)
+			minSpan = currentSpan;
+		if (minSpan == 0)
+			return (0);
+	}
+	return (minSpan);
 }
 
 const char* Span::SpanFullException::what() const throw()
 {
-	return ("Span is full");
+	return ("Span is full.\n");
 }
 
-const char* Span::NotEnoughNumbersException::what() const throw()
+const char *Span::NotEnoughNumbersException::what() const throw()
 {
-	return ("Not enough numbers");
+	return ("Function requires two or more elements in span.\n");
 }
