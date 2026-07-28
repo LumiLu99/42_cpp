@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 14:25:42 by yelu              #+#    #+#             */
-/*   Updated: 2026/07/28 16:54:11 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/28 18:59:27 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,9 @@ class MutantStack : public std::stack<T>
 #include "MutantStack.tpp"
 
 #endif
+
+// Without typedef inside the template class, you have to manually write
+// class MutantStack_int { typedef std::deque<int>::iterator iterator; };
+// class MutantStack_double { typedef std::deque<double>::iterator iterator; };
+// class MutantStack_string { typedef std::deque<string>::iterator iterator; };
+
