@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 18:07:43 by yelu              #+#    #+#             */
-/*   Updated: 2026/07/30 19:54:18 by yelu             ###   ########.fr       */
+/*   Updated: 2026/07/30 20:04:22 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ void RPN::parseNotations(int argc, char **argv)
 {
 	for (int i = 0; i < argc; i++)
 	{
-		if (argv[i][0] >= '0' && argv[i][0] <= '9')
+		if (argv[1][i] >= '0' && argv[1][i] <= '9')
 		{
-			
+			_num.push(std::atoi(argv[i]));
+		}
+		else if (argv[i] == "+" || argv[i] == "-" || argv[i] == "*" || argv[i] == "/")
+		{
+			if (_num.size() < 2)
+			{
+				std::cout << "Error: Not enough operands for operation." << "\n";
+				return ;
+			}
 		}
 	}
 }
