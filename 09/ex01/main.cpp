@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 18:07:41 by yelu              #+#    #+#             */
-/*   Updated: 2026/07/30 17:20:38 by yelu             ###   ########.fr       */
+/*   Updated: 2026/08/03 16:10:08 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int main(int argc, char **argv)
 {
-	if (argc > 2 && argc < 10)
+	if (argc == 2)
 	{
 		RPN rpn;
-		rpn.parseNotations(argc, argv);
+		rpn.parseNotations(argv);
+		return (0);
 	}
-	std::cout << "Usage: ./RPN <arguments>" << "\n";
+	else
+		std::cout << "Usage: ./RPN <arguments>" << "\n";
 }
