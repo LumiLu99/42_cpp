@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RPN.hpp                                            :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/29 18:07:45 by yelu              #+#    #+#             */
-/*   Updated: 2026/08/04 14:52:56 by yelu             ###   ########.fr       */
+/*   Created: 2026/08/03 17:30:07 by yelu              #+#    #+#             */
+/*   Updated: 2026/08/04 14:54:49 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-#include <stack>
-#include <cstdlib>
-#include <sstream>
+#include <fstream>
+#include <map>
 
-class RPN
+class BitcoinExchange
 {
 	private:
-		std::stack<int> _stack;
-		RPN(const RPN &other);
-		RPN &operator=(const RPN &other);
+		BitcoinExchange(const BitcoinExchange &other);
+		BitcoinExchange &operator=(const BitcoinExchange &other);
 
+		std::map<std::string, double> _data;
+	
 	public:
-		RPN();
-		~RPN();
-		void	parseNotations(char **argv);
-		bool	performOperation(char input, int *result);
+		BitcoinExchange();
+		~BitcoinExchange();
+		bool	processInputFile(const std::string &filename);
+		bool	parseLine(std::string line);
+		
 };
-
