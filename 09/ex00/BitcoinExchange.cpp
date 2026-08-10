@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 17:29:56 by yelu              #+#    #+#             */
-/*   Updated: 2026/08/10 15:52:30 by yelu             ###   ########.fr       */
+/*   Updated: 2026/08/10 17:19:01 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool	BitcoinExchange::processInputFile(const std::string &filename)
 			}
 			else
 			{
-				std::cout << entry.first << " => " << entry.second << std::endl;
+				std::cout << entry.first << " => " << entry.second << "\n";
 				i++;
 			}
 		}
@@ -93,15 +93,35 @@ bool	BitcoinExchange::processInputFile(const std::string &filename)
 
 bool BitcoinExchange::isValidDate(const std::string &date)
 {
+	const int mnth[] = {
+		0, 31, 28, 31, 30, 31, 30,
+		31, 31, 30, 31, 30, 31
+	};
 	std::stringstream ss(date);
-	std::string year, month, day;
-	if (!getline(ss, year, '-') || !getline(ss, month, '-') || !getline(ss, day))
+	std::string StrYear, StrMonth, StrDay;
+	if (!getline(ss, StrYear, '-') || !getline(ss, StrMonth, '-') || !getline(ss, StrDay))
+		return (false);
+	int y, m, d;
+	std::stringstream ssy;
+	std::stringstream ssm;
+	std::stringstream ssd;
+	ssy << StrYear;
+	ssy >> y;
+	ssm << StrMonth;
+	ssm >> m;
+	ssd << StrDay;
+	ssd >> d;
+	if (y < 1900 || y > 3000 || m < 1 || m > 12)
+		return (false);
+	int maxDay = mnth[m];
+	if ((m == 2 && (y % 4 == 0 && y % 100 != 0)) || (y % 400 == 0))
+		maxDay = 29;
+	if (d < 1 || d > maxDay)
 		return (false);
 	return (true);
-
 }
 
-bool BitcoinExchange::isValidValue(const std::string &value)
+bool	BitcoinExchange::isValidValue(const std::string &value)
 {
 	(void)value;
 	return (true);
@@ -120,7 +140,8 @@ bool	BitcoinExchange::parseDatabaseLine(const std::string &line, std::pair<std::
 			return (false);
 		entry.first = date;
 		float exchangeRate;
-		std::stringstream(value) >> exchangeRate;
+		if (!(std::stringstream(value) >> exchangeRate))
+			return (false);
 		entry.second = exchangeRate;
 		return (true);
 }
@@ -132,16 +153,24 @@ bool	BitcoinExchange::parseInputLine(const std::string &line, std::pair<std::str
 	std::stringstream ss(line);
 	if (!std::getline(ss, date, delimiter) || !std::getline(ss, value))
 	{
-		std::cerr << "Error: Invalid line format in input file at line " << i << ": " << line << std::endl;
+		std::cerr << "Error: Invalid line format in input file at line " << i << ": " << line << "\n";
+		return (false);
+	}
+	if (date.empty() || value.empty())
+	{
+		std::cerr << "Error: Missing date or value in input file at line " << i << ": " << line << "\n";
 		return (false);
 	}
 	if (!isValidDate(date))
 	{
-		std::cerr << "Error: bad input in input file => " << date << " at line " << i << "\n";
+		std::cerr << "Error: bad input in input file at line " << i << " => " << date << "\n";
 		return (false);
 	}
 	if (!isValidValue(value))
+	{
+		std::cerr << "Error: bad input in input file at line " << i << " => " << date << "\n";
 		return (false);
+	}
 	(void)entry;
 	return (true);
 }
@@ -153,7 +182,7 @@ void	BitcoinExchange::printDatabase() const
 	std::map<std::string, float>::const_iterator it = _database.begin();
 	while (it != _database.end())
 	{
-		std::cout << it->first << " => " << it->second << std::endl;
+		std::cout << it->first << " => " << it->second << "\n";
 		++it;
 	}
 }
