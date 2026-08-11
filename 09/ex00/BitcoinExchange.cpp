@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 17:29:56 by yelu              #+#    #+#             */
-/*   Updated: 2026/08/10 17:19:01 by yelu             ###   ########.fr       */
+/*   Updated: 2026/08/11 18:21:47 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	BitcoinExchange::loadDataFromCSV(const std::string &database)
 		}
 	}
 	file.close();
-	printDatabase();
+	// printDatabase();
 }
 
 bool	BitcoinExchange::processInputFile(const std::string &filename)
@@ -77,7 +77,7 @@ bool	BitcoinExchange::processInputFile(const std::string &filename)
 			}
 			else
 			{
-				std::cout << entry.first << " => " << entry.second << "\n";
+				evaluate(entry.first, entry.second);
 				i++;
 			}
 		}
@@ -90,6 +90,29 @@ bool	BitcoinExchange::processInputFile(const std::string &filename)
 // Private member functions
 // ================================================================================
 
+
+void	BitcoinExchange::evaluate(const std::string &date, float value)
+{
+	std::map<std::string, float>::const_iterator it = _database.lower_bound(date);
+	if (it == _database.end())
+	{
+		--it;
+	}
+	else if (it->first != date && it != _database.begin())
+	{
+		--it;
+	}
+	else if (it->first != date && it == _database.begin())
+	{
+		std::cerr << "Error: No exchange rate available for date " << date << "\n";
+		return ;
+	}
+	float exchangeRate = it->second;
+	double result = value * exchangeRate;
+	std::cout << "Exchange rate: " << exchangeRate << "\n";
+	std::cout << std::fixed << std::setprecision(2);
+	std::cout << date << " => " << value << " = " << result << "\n";
+}
 
 bool BitcoinExchange::isValidDate(const std::string &date)
 {
@@ -112,20 +135,56 @@ bool BitcoinExchange::isValidDate(const std::string &date)
 	ssd << StrDay;
 	ssd >> d;
 	if (y < 1900 || y > 3000 || m < 1 || m > 12)
+	{
 		return (false);
+	}
 	int maxDay = mnth[m];
 	if ((m == 2 && (y % 4 == 0 && y % 100 != 0)) || (y % 400 == 0))
 		maxDay = 29;
 	if (d < 1 || d > maxDay)
+	{
 		return (false);
+	}
 	return (true);
 }
 
 bool	BitcoinExchange::isValidValue(const std::string &value)
 {
-	(void)value;
+	float fvalue;
+	std::stringstream ssvalue;
+	ssvalue << value;
+	ssvalue >> fvalue;
+	if (fvalue > 1000)
+	{
+		std::cerr << "Error: Value exceeds maximum limit of 1000. ";
+		return (false);
+	}
+	else if (fvalue < 0)
+	{
+		std::cerr << "Error: Value cannot be negative. ";
+		return (false);
+	}
+	else if (ssvalue.fail() || !ssvalue.eof())
+	{
+		std::cerr << "Error: Invalid value format. ";
+		return (false);
+	}
 	return (true);
 }
+
+bool	BitcoinExchange::isValidDatabaseValue(const std::string &value)
+{
+	float fvalue;
+	std::stringstream ssvalue;
+	ssvalue << value;
+	ssvalue >> fvalue;
+	if (fvalue < 0)
+		return (false);
+	else if (ssvalue.fail() || !ssvalue.eof())
+		return (false);
+	return (true);
+}
+
 
 bool	BitcoinExchange::parseDatabaseLine(const std::string &line, std::pair<std::string, float> &entry, char delimiter)
 {
@@ -136,7 +195,7 @@ bool	BitcoinExchange::parseDatabaseLine(const std::string &line, std::pair<std::
 			return (false);
 		if (!isValidDate(date))
 			return (false);
-		if (!isValidValue(value))
+		if (!isValidDatabaseValue(value))
 			return (false);
 		entry.first = date;
 		float exchangeRate;
@@ -163,18 +222,21 @@ bool	BitcoinExchange::parseInputLine(const std::string &line, std::pair<std::str
 	}
 	if (!isValidDate(date))
 	{
-		std::cerr << "Error: bad input in input file at line " << i << " => " << date << "\n";
+		std::cerr << "Error: Invalid date in input file at line " << i << ": " << date << "\n";
 		return (false);
 	}
 	if (!isValidValue(value))
 	{
-		std::cerr << "Error: bad input in input file at line " << i << " => " << date << "\n";
+		std::cerr << "Invalid value in input file at line " << i << ": " << value << "\n";
 		return (false);
 	}
-	(void)entry;
+	entry.first = date;
+	float exchangeRate;
+	if (!(std::stringstream(value) >> exchangeRate))
+		return (false);
+	entry.second = exchangeRate;
 	return (true);
 }
-
 
 
 void	BitcoinExchange::printDatabase() const

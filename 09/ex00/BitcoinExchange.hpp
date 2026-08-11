@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 17:30:07 by yelu              #+#    #+#             */
-/*   Updated: 2026/08/10 15:45:11 by yelu             ###   ########.fr       */
+/*   Updated: 2026/08/11 18:22:03 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <stdexcept>
 #include <ostream>
 #include <cstdlib>
+#include <limits>
+#include <iomanip>
 
 class BitcoinExchange
 {
@@ -31,6 +33,8 @@ class BitcoinExchange
 		bool	parseInputLine(const std::string &line, std::pair<std::string, float> &entry, char delimiter, int i);
 		bool	isValidDate(const std::string &date);
 		bool	isValidValue(const std::string &value);
+		bool	isValidDatabaseValue(const std::string &value);
+		void	evaluate(const std::string &date, float value);
 
 	public:
 		BitcoinExchange();
