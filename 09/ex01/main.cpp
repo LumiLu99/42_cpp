@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	else
-		std::cout << "Usage: ./RPN <arguments> (ie: '8 9 +')" << "\n\n";
+		std::cout << "Usage: ./RPN <arguments> (ie: '8 9 +')" << "\n";
 }
 
 // int main(int argc, char **argv)

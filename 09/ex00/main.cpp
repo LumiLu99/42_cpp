@@ -29,5 +29,5 @@ int main(int argc, char **argv)
 		}
 	}
 	else
-		std::cerr << "Error: Usage: ./bitcoin <input_file>\n\n";
+		std::cerr << "Error: Usage: ./bitcoin <input_file>\n";
 }
