@@ -1,0 +1,36 @@
+name: CPP09
+
+on:
+  push:
+    paths:
+      - 'cpp09/**'
+      - '.github/workflows/09.yml'
+  pull_request:
+    paths:
+      - '09/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 09
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build ex00 (Bitcoin Exchange)
+        run: |
+          cd ex00
+          make
+        
+      - name: Build ex01 (RPN)
+        run: |
+          cd ex01
+          make
+        
+      - name: Build ex02 (PmergeMe)
+        run: |
+          cd ex02
+          make
