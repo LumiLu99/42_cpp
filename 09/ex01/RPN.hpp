@@ -16,11 +16,12 @@
 #include <stack>
 #include <cstdlib>
 #include <sstream>
+#include <list>
 
 class RPN
 {
 	private:
-		std::stack<int> _stack;
+		std::stack<int, std::list<int> > _stack;
 		RPN(const RPN &other);
 		RPN &operator=(const RPN &other);
 
@@ -30,4 +31,3 @@ class RPN
 		void	parseNotations(char **argv);
 		bool	performOperation(char input, int *result);
 };
-

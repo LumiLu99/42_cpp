@@ -66,7 +66,7 @@ bool	BitcoinExchange::processInputFile(const std::string &filename)
 		std::getline(inputFile, line);
 		if (line != "date | value")
 			throw std::invalid_argument("Error: Expected header in input file");
-		int i = 1;
+		int i = 2;
 		while (std::getline(inputFile, line))
 		{
 			std::pair<std::string, float> entry;
@@ -109,9 +109,8 @@ void	BitcoinExchange::evaluate(const std::string &date, float value)
 	}
 	float exchangeRate = it->second;
 	double result = value * exchangeRate;
-	std::cout << "Exchange rate: " << exchangeRate << "\n";
 	std::cout << std::fixed << std::setprecision(2);
-	std::cout << date << " => " << value << " = " << result << "\n";
+	std::cout << date << " => " << value << " * " << exchangeRate << " = " << result << "\n";
 }
 
 bool BitcoinExchange::isValidDate(const std::string &date)
@@ -153,10 +152,9 @@ bool	BitcoinExchange::isValidValue(const std::string &value)
 	float fvalue;
 	std::stringstream ssvalue;
 	ssvalue << value;
-	ssvalue >> fvalue;
-	if (fvalue > 1000)
+	if (!(ssvalue >> fvalue) || !ssvalue.eof())
 	{
-		std::cerr << "Error: Value exceeds maximum limit of 1000. ";
+		std::cerr << "Error: Invalid value format. ";
 		return (false);
 	}
 	else if (fvalue < 0)
@@ -164,9 +162,9 @@ bool	BitcoinExchange::isValidValue(const std::string &value)
 		std::cerr << "Error: Value cannot be negative. ";
 		return (false);
 	}
-	else if (ssvalue.fail() || !ssvalue.eof())
+	else if (fvalue > 1000)
 	{
-		std::cerr << "Error: Invalid value format. ";
+		std::cerr << "Error: Value exceeded maximum allowed value of 1000. ";
 		return (false);
 	}
 	return (true);
@@ -212,6 +210,10 @@ bool	BitcoinExchange::parseInputLine(const std::string &line, std::pair<std::str
 	std::stringstream ss(line);
 	if (!std::getline(ss, date, delimiter) || !std::getline(ss, value))
 	{
+		if (line.empty())
+		{
+			return (false);
+		}
 		std::cerr << "Error: Invalid line format in input file at line " << i << ": " << line << "\n";
 		return (false);
 	}

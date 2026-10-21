@@ -89,7 +89,7 @@ void RPN::parseNotations(char **argv)
 		{
 			if (_stack.size() < 2)
 			{
-				std::cerr << "Error: Not enough operands for operation\n";
+				std::cerr << "Error: Not enough numbers for operation\n";
 				return ;
 			}
 			if (performOperation(token[0], &result))
@@ -109,17 +109,13 @@ void RPN::parseNotations(char **argv)
 			return ;
 		}
 	}
-	// if (!ss.eof())
-	// {
-	// 	std::cerr << "Error: Invalid RPN syntax\n";
-	// 	return ;
-	// }
 	if (_stack.size() > 1)
 	{
-		std::cerr << "Error: More than one elements still in stack\n";
+		std::cerr << "Error: Not enough operators for calculation\n";
 		return ;
 	}
-	std::cout << _stack.top() << "\n";
+	if (!_stack.empty())
+		std::cout << _stack.top() << "\n";
 }
 
 // bool	RPN::performOperation(char input, int *result)

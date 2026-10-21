@@ -21,6 +21,8 @@
 #include <cctype>
 #include <algorithm>
 #include <cmath>
+#include <sys/time.h>
+#include <iomanip>
 
 class PmergeMe
 {
@@ -30,30 +32,44 @@ class PmergeMe
 		double				_dequeTime;
 		double				_vectorTime;
 
-		void				sortDeque();
-		void				sortVector();
+		void				sortData();
 
 		static bool 						countingComp(int a, int b);
 		int									parsePositiveInteger(const std::string &argv);
-		std::vector<int>					mergeInsertSort(std::vector<int> vec);
-		std::vector<std::pair<int,int> >	makePairs(std::vector<int> &vec, int &leftovers, bool &hasLeftovers);
-		void								buildChains(std::vector<std::pair<int,int> > &pairs,
+		
+		// Vector
+		std::vector<std::pair<int,int> >	makePairs_vect(std::vector<int> &vec, int &leftovers, bool &hasLeftovers);
+		std::vector<int>					mergeInsertSort_vect(std::vector<int> vec);
+		void								buildChains_vect(std::vector<std::pair<int,int> > &pairs,
 											std::vector<int> &winners,
 											std::vector<int> &mainChain,
 											std::vector<int> &pend);
-		void								jacobsthalInsert(std::vector<int> &mainChain,
+		void								jacobsthalInsert_vect(std::vector<int> &mainChain,
 											std::vector<int> &pend,
 											std::vector<std::pair<int,int> > &pairs,
+											int leftovers, bool hasLeftovers);
+
+		// Deque
+		std::deque<std::pair<int,int> >		makePairs_deq(std::deque<int> &deq, int &leftovers, bool &hasLeftovers);
+		std::deque<int>						mergeInsertSort_deq(std::deque<int> deq);
+		void								buildChains_deq(std::deque<std::pair<int,int> > &pairs,
+											std::deque<int> &winners,
+											std::deque<int> &mainChain,
+											std::deque<int> &pend);
+		void								jacobsthalInsert_deq(std::deque<int> &mainChain,
+											std::deque<int> &pend,
+											std::deque<std::pair<int,int> > &pairs,
 											int leftovers, bool hasLeftovers);
 
 
 	public:
 
 		static int	_compCount;
-	
+		
+		PmergeMe();
 		PmergeMe(int argc, char **argv);
 		PmergeMe(const PmergeMe &other);
-		PmergeMe operator=(const PmergeMe &other);
+		PmergeMe &operator=(const PmergeMe &other);
 		~PmergeMe();
 
 		void	run();
