@@ -66,14 +66,6 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 	return (*this);
 }
 
-PmergeMe::~PmergeMe() {}
-
-bool PmergeMe::countingComp(int a, int b)
-{
-	PmergeMe::_compCount++;
-	return (a < b);
-}
-
 static int F(int n)
 {
 	int sum = 0;
@@ -82,6 +74,14 @@ static int F(int n)
 		sum += static_cast<int>(ceil(log2(value)));
 	}
 	return (sum);
+}
+
+PmergeMe::~PmergeMe() {}
+
+static bool countingComp(std::vector<int>::iterator a, std::vector<int>::iterator b)
+{
+	PmergeMe::_compCount++;
+	return (*a < *b);
 }
 
 int PmergeMe::parsePositiveInteger(const std::string &argv)
@@ -108,8 +108,10 @@ void PmergeMe::run()
 
 	sortData();
 
-	std::cout << "After:  ";
+	std::cout << "Vector After:  ";
 	printVector(_vector);
+	std::cout << "Deque After: ";
+	printDeque(_deque);
 
 	std::cout << std::fixed << std::setprecision(5);
 	std::cout << "Time to process a range of " << _vector.size()
@@ -131,237 +133,238 @@ void	PmergeMe::sortData()
 	struct timeval start, end;
 
 	gettimeofday(&start, NULL);
-	_vector = mergeInsertSort_vect(_vector);
+	mergeInsertSort_vect(_vector, 1);
 	gettimeofday(&end, NULL);
 	_vectorTime = static_cast<double>(end.tv_sec - start.tv_sec) * 1000000.0 + static_cast<double>(end.tv_usec - start.tv_usec);
 
 	gettimeofday(&start, NULL);
-	_deque = mergeInsertSort_deq(_deque);
+	mergeInsertSort_deq(_deque, 1);
 	gettimeofday(&end, NULL);
 	_dequeTime = static_cast<double>(end.tv_sec - start.tv_sec) * 1000000.0 + static_cast<double>(end.tv_usec - start.tv_usec);
 }
 
-// VECTOR
-
-static std::vector<std::pair<int,int> > sortPairs_vect(std::vector<std::pair<int,int> > &pairs, const std::vector<int> &winners)
+static void swapGroups(std::vector<int>::iterator groupA, std::vector<int>::iterator groupB, int pairLevel)
 {
-	std::vector<std::pair<int,int> > sortedPairs;
-	for (size_t i = 0; i < winners.size(); i++)
+	for (int i = 0; i < pairLevel; i++)
 	{
-		for (size_t j = 0; j < pairs.size(); j++)
+		std::iter_swap(groupA + i, groupB + i);
+	}
+}
+
+static void sortChunks(std::vector<int>& vec, int pairLevel)
+{
+	int step = 2 * pairLevel;
+	int numGroups = vec.size() / pairLevel;
+	int numPairs =  numGroups / 2;
+
+	for (int i = 0; i < numPairs; i++)
+	{
+		std::vector<int>::iterator groupA = vec.begin() + (i * step);
+		std::vector<int>::iterator groupB = groupA + pairLevel;
+
+		// The winner of a group is the last element (group + pairLevel - 1)
+		std::vector<int>::iterator winnerA = groupA + (pairLevel - 1);
+		std::vector<int>::iterator winnerB = groupB + (pairLevel - 1);
+
+		// Knuth comparison: if winnder A > winnerB, swap the two groups
+		if (countingComp(winnerB, winnerA))
 		{
-			if (pairs[j].second == winners[i])
-			{
-				sortedPairs.push_back(pairs[j]);
-				pairs.erase(pairs.begin() + j);
-				break;
-			}
+			swapGroups(groupA, groupB, pairLevel);
 		}
 	}
-	return (sortedPairs);
 }
 
-std::vector<std::pair<int,int> > PmergeMe::makePairs_vect(std::vector<int> &vec, int &leftovers, bool &hasLeftovers)
+static void buildChains(std::vector<int>& vec, 	std::vector<std::vector<int>::iterator>& mainChain, std::vector<std::vector<int>::iterator>& pend, int numGroups, int pairLevel)
 {
-	std::vector<std::pair<int,int> > pairs;
-	for (size_t i = 0; i + 1 < vec.size(); i += 2)
+	mainChain.push_back(vec.begin() + 1 * pairLevel - 1);
+	mainChain.push_back(vec.begin() + 2 * pairLevel - 1);
+	for (int i = 3; i <= numGroups; i++)
 	{
-		int a = vec[i];
-		int b = vec[i + 1];
-		if (a > b)
+		if (i % 2 == 1)
+			pend.push_back(vec.begin() + i * pairLevel - 1);
+		else
+			mainChain.push_back(vec.begin() + i * pairLevel - 1);
+	}
+}
+
+static void jacobsthalInsert(std::vector<int>& vec, std::vector<std::vector<int>::iterator>& mainChain, std::vector<std::vector<int>::iterator>& pend, int pairLevel)
+{
+		int numGroups = vec.size() / pairLevel;
+        int lastB = pend.size() + 1;
+        int prevJ = 1;
+        int currJ = 3;
+
+        while (prevJ < lastB)
+        {
+            int startB = std::min(currJ, lastB);
+            for (int b = startB; b > prevJ; --b)
+            {
+                 std::vector<int>::iterator itemToInsert = pend[b - 2];
+
+                // Find where partner a_b currently sits in mainChain
+                std::vector<std::vector<int>::iterator>::iterator bound = mainChain.end();
+                int partnerChunk = 2 * b;
+                if (partnerChunk <= numGroups)
+                {
+                    std::vector<int>::iterator partnerLeader = vec.begin() + partnerChunk * pairLevel - 1;
+                    bound = std::find(mainChain.begin(), mainChain.end(), partnerLeader);
+                }
+
+                // Binary search in [begin, bound) and insert
+                std::vector<std::vector<int>::iterator>::iterator pos =
+                	std::upper_bound(mainChain.begin(), bound, itemToInsert, countingComp);
+                mainChain.insert(pos, itemToInsert);
+            }
+            int nextJ = currJ + 2 * prevJ;
+            prevJ = currJ;
+            currJ = nextJ;
+        }
+}
+
+static void reconstructSortedVector(std::vector<int>& vec, std::vector<std::vector<int>::iterator>& mainChain, int pairLevel)
+{
+	std::vector<int> temp;
+	temp.reserve(vec.size());
+	for (size_t i = 0; i < mainChain.size(); i++)
+	{
+		std::vector<int>::iterator chunkStart = mainChain[i] - (pairLevel - 1);
+		for (int j = 0; j < pairLevel; j++)
 		{
-			std::swap(a, b);
-			_compCount++;
-		}
-		pairs.push_back(std::make_pair(a, b));
-	}
-	if (vec.size() % 2 != 0)
-	{
-		leftovers = vec.back();
-		hasLeftovers = true;
-	}
-	return (pairs);
-}
-
-void	PmergeMe::buildChains_vect(std::vector<std::pair<int,int> > &pairs, std::vector<int> &winners, std::vector<int> &mainChain, std::vector<int> &pend)
-{
-	mainChain.push_back(pairs[0].first);
-	for (size_t i = 0; i < winners.size(); i++)
-	{
-		mainChain.push_back(winners[i]);
-	}
-	for (size_t i = 1; i < pairs.size(); i++)
-	{
-		pend.push_back(pairs[i].first);
-	}
-}
-
-void	PmergeMe::jacobsthalInsert_vect(std::vector<int> &mainChain, std::vector<int> &pend, std::vector<std::pair<int,int> > &pairs, int leftovers, bool hasLeftovers)
-{
-	std::vector<int> jacob;
-	jacob.push_back(3);
-	jacob.push_back(5);
-	while (jacob.back() < static_cast<int>(pend.size()))
-	{
-		int n = jacob.size();
-		jacob.push_back(jacob[n-1] + 2 * jacob[n-2]);
-	}
-	int prev = 0;
-	for (size_t k = 0; k < jacob.size(); k++)
-	{
-		int curr = std::min(jacob[k], static_cast<int>(pend.size()));
-
-		for (int j = curr - 1; j >= prev; j--)
-		{
-			int pairedWinner = pairs[j + 1].second;
-			std::vector<int>::iterator bound = std::find(
-				mainChain.begin(), mainChain.end(), pairedWinner
-			);
-
-			std::vector<int>::iterator pos = std::lower_bound(
-				mainChain.begin(), bound, pend[j], countingComp
-			);
-			mainChain.insert(pos, pend[j]);
-		}
-		prev = curr;
-		if (prev >= static_cast<int>(pend.size()))
-			break;
-	}
-	if (hasLeftovers)
-	{
-		std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), leftovers, countingComp);
-		mainChain.insert(pos, leftovers);
-	}
-}
-
-std::vector<int> PmergeMe::mergeInsertSort_vect(std::vector<int> vec)
-{
-	if (vec.size() <= 1)
-		return (vec);
-	int		leftovers = 0;
-	bool	hasLeftovers = false;
-	std::vector<std::pair<int,int> > pairs = makePairs_vect(vec, leftovers, hasLeftovers);
-	std::vector<int> winners;
-	for (size_t i = 0; i < pairs.size(); i++)
-		winners.push_back(pairs[i].second);
-	winners = mergeInsertSort_vect(winners);
-	pairs = sortPairs_vect(pairs, winners);
-	std::vector<int> mainChain;
-	std::vector<int> pend;
-	buildChains_vect(pairs, winners, mainChain, pend);
-	jacobsthalInsert_vect(mainChain, pend, pairs, leftovers, hasLeftovers);
-	return (mainChain);
-}
-
-// DEQUE SORT
-
-static std::deque<std::pair<int,int> > sortPairs_deq(const std::deque<std::pair<int,int> > &pairs, const std::deque<int> &winners)
-{
-	std::deque<std::pair<int,int> > sortedPairs;
-	for (size_t i = 0; i < winners.size(); i++)
-	{
-		for (size_t j = 0; j < pairs.size(); j++)
-		{
-			if (pairs[j].second == winners[i])
-			{
-				sortedPairs.push_back(pairs[j]);
-				break;
-			}
+			temp.push_back(*(chunkStart + j));
 		}
 	}
-	return (sortedPairs);
+	std::copy(temp.begin(), temp.end(), vec.begin());
 }
 
-std::deque<std::pair<int,int> > PmergeMe::makePairs_deq(std::deque<int> &deq, int &leftovers, bool &hasLeftovers)
+void PmergeMe::mergeInsertSort_vect(std::vector<int>& vec, int pairLevel)
 {
-	std::deque<std::pair<int,int> > pairs;
-	for (size_t i = 0; i + 1 < deq.size(); i += 2)
+	int numGroups = vec.size() / pairLevel;
+	if (numGroups < 2)
+		return ;
+	sortChunks(vec, pairLevel);
+	mergeInsertSort_vect(vec, (pairLevel * 2));
+	std::vector<std::vector<int>::iterator> mainChain;
+	std::vector<std::vector<int>::iterator> pend;
+	buildChains(vec, mainChain, pend, numGroups, pairLevel);
+	jacobsthalInsert(vec, mainChain, pend, pairLevel);
+	reconstructSortedVector(vec, mainChain, pairLevel);
+}
+
+// DEQUE
+
+static bool countingComp_deq(std::deque<int>::iterator a, std::deque<int>::iterator b)
+{
+	return (*a < *b);
+}
+
+void PmergeMe::mergeInsertSort_deq(std::deque<int>& deq, int pairLevel)
+{
+	int numGroups = deq.size() / pairLevel;
+	if (numGroups < 2)
+		return ;
+	sortChunks_deq(deq, pairLevel);
+	mergeInsertSort_deq(deq, (pairLevel * 2));
+	std::deque<std::deque<int>::iterator> mainChain;
+	std::deque<std::deque<int>::iterator> pend;
+	buildChains_deq(deq, mainChain, pend, numGroups, pairLevel);
+	jacobsthalInsert_deq(deq, mainChain, pend, pairLevel);
+	reconstructSortedDeque(deq, mainChain, pairLevel);
+}
+
+void PmergeMe::buildChains_deq(std::deque<int>& deq, std::deque<std::deque<int>::iterator>& mainChain, std::deque<std::deque<int>::iterator>& pend, int numGroups, int pairLevel)
+{
+	mainChain.push_back(deq.begin() + 1 * pairLevel - 1);
+	mainChain.push_back(deq.begin() + 2 * pairLevel - 1);
+	for (int i = 3; i <= numGroups; i++)
 	{
-		int a = deq[i];
-		int b = deq[i + 1];
-		if (a > b)
+		if (i % 2 == 1)
+			pend.push_back(deq.begin() + i * pairLevel - 1);
+		else
+			mainChain.push_back(deq.begin() + i * pairLevel - 1);
+	}
+}
+
+void PmergeMe::jacobsthalInsert_deq(std::deque<int>& vec, std::deque<std::deque<int>::iterator>& mainChain, std::deque<std::deque<int>::iterator>& pend, int pairLevel)
+{
+		int numGroups = vec.size() / pairLevel;
+        int lastB = pend.size() + 1;
+        int prevJ = 1;
+        int currJ = 3;
+
+        while (prevJ < lastB)
+        {
+            int startB = std::min(currJ, lastB);
+            for (int b = startB; b > prevJ; --b)
+            {
+                 std::deque<int>::iterator itemToInsert = pend[b - 2];
+
+                // Find where partner a_b currently sits in mainChain
+                std::deque<std::deque<int>::iterator>::iterator bound = mainChain.end();
+                int partnerChunk = 2 * b;
+                if (partnerChunk <= numGroups)
+                {
+                    std::deque<int>::iterator partnerLeader = vec.begin() + partnerChunk * pairLevel - 1;
+                    bound = std::find(mainChain.begin(), mainChain.end(), partnerLeader);
+                }
+
+                // Binary search in [begin, bound) and insert
+                std::deque<std::deque<int>::iterator>::iterator pos =
+                	std::upper_bound(mainChain.begin(), bound, itemToInsert, countingComp_deq);
+                mainChain.insert(pos, itemToInsert);
+            }
+            int nextJ = currJ + 2 * prevJ;
+            prevJ = currJ;
+            currJ = nextJ;
+        }
+}
+
+void PmergeMe::reconstructSortedDeque(std::deque<int>& vec, std::deque<std::deque<int>::iterator>& mainChain, int pairLevel)
+{
+	std::deque<int> temp;
+	for (size_t i = 0; i < mainChain.size(); i++)
+	{
+		std::deque<int>::iterator chunkStart = mainChain[i] - (pairLevel - 1);
+		for (int j = 0; j < pairLevel; j++)
 		{
-			std::swap(a, b);
+			temp.push_back(*(chunkStart + j));
 		}
-		pairs.push_back(std::make_pair(a, b));
 	}
-	if (deq.size() % 2 != 0)
-	{
-		leftovers = deq.back();
-		hasLeftovers = true;
-	}
-	return (pairs);
+	std::copy(temp.begin(), temp.end(), vec.begin());
 }
 
-void	PmergeMe::buildChains_deq(std::deque<std::pair<int,int> > &pairs, std::deque<int> &winners, std::deque<int> &mainChain, std::deque<int> &pend)
+void PmergeMe::swapGroups_deq(std::deque<int>::iterator groupA, std::deque<int>::iterator groupB, int pairLevel)
 {
-	mainChain.push_back(pairs[0].first);
-	for (size_t i = 0; i < winners.size(); i++)
+	for (int i = 0; i < pairLevel; i++)
 	{
-		mainChain.push_back(winners[i]);
-	}
-	for (size_t i = 1; i < pairs.size(); i++)
-	{
-		pend.push_back(pairs[i].first);
+		std::iter_swap(groupA + i, groupB + i);
 	}
 }
 
-void	PmergeMe::jacobsthalInsert_deq(std::deque<int> &mainChain, std::deque<int> &pend, std::deque<std::pair<int,int> > &pairs, int leftovers, bool hasLeftovers)
+void PmergeMe::sortChunks_deq(std::deque<int>& deq, int pairLevel)
 {
-	std::vector<int> jacob;
-	jacob.push_back(3);
-	jacob.push_back(5);
-	while (jacob.back() < static_cast<int>(pend.size()))
-	{
-		int n = jacob.size();
-		jacob.push_back(jacob[n-1] + 2 * jacob[n-2]);
-	}
-	int prev = 0;
-	for (size_t k = 0; k < jacob.size(); k++)
-	{
-		int curr = std::min(jacob[k], static_cast<int>(pend.size()));
+	int step = 2 * pairLevel;
+	int numGroups = deq.size() / pairLevel;
+	int numPairs =  numGroups / 2;
 
-		for (int j = curr - 1; j >= prev; j--)
+	for (int i = 0; i < numPairs; i++)
+	{
+		std::deque<int>::iterator groupA = deq.begin() + (i * step);
+		std::deque<int>::iterator groupB = groupA + pairLevel;
+
+		// The winner of a group is the last element (group + pairLevel - 1)
+		std::deque<int>::iterator winnerA = groupA + (pairLevel - 1);
+		std::deque<int>::iterator winnerB = groupB + (pairLevel - 1);
+
+		// Knuth comparison: if winnder A > winnerB, swap the two groups
+		if (countingComp_deq(winnerB, winnerA))
 		{
-			int pairedWinner = pairs[j + 1].second;
-			std::deque<int>::iterator bound = std::find(
-				mainChain.begin(), mainChain.end(), pairedWinner
-			);
-
-			std::deque<int>::iterator pos = std::lower_bound(
-				mainChain.begin(), bound, pend[j]
-			);
-			mainChain.insert(pos, pend[j]);
+			swapGroups_deq(groupA, groupB, pairLevel);
 		}
-		prev = curr;
-		if (prev >= static_cast<int>(pend.size()))
-			break;
-	}
-	if (hasLeftovers)
-	{
-		std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), leftovers);
-		mainChain.insert(pos, leftovers);
 	}
 }
 
-std::deque<int> PmergeMe::mergeInsertSort_deq(std::deque<int> deq)
-{
-	if (deq.size() <= 1)
-		return (deq);
-	int		leftovers = 0;
-	bool	hasLeftovers = false;
-	std::deque<std::pair<int,int> > pairs = makePairs_deq(deq, leftovers, hasLeftovers);
-	std::deque<int> winners;
-	for (size_t i = 0; i < pairs.size(); i++)
-		winners.push_back(pairs[i].second);
-	winners = mergeInsertSort_deq(winners);
-	pairs = sortPairs_deq(pairs, winners);
-	std::deque<int> mainChain;
-	std::deque<int> pend;
-	buildChains_deq(pairs, winners, mainChain, pend);
-	jacobsthalInsert_deq(mainChain, pend, pairs, leftovers, hasLeftovers);
-	return (mainChain);
-}
+
+// PRINTING
 
 void	printVector(const std::vector<int> &vec)
 {
@@ -380,8 +383,6 @@ void	printDeque(const std::deque<int> &deq)
 	}
 	std::cout << "\n";
 }
-
-
 
 //   The rule: insert from the larger bound first, while the chain is still short.
 

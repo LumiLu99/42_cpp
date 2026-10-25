@@ -34,32 +34,20 @@ class PmergeMe
 
 		void				sortData();
 
-		static bool 						countingComp(int a, int b);
+		// bool 						countingComp(std::vector<int>::iterator a, std::vector<int>::iterator b);
 		int									parsePositiveInteger(const std::string &argv);
-		
+
 		// Vector
-		std::vector<std::pair<int,int> >	makePairs_vect(std::vector<int> &vec, int &leftovers, bool &hasLeftovers);
-		std::vector<int>					mergeInsertSort_vect(std::vector<int> vec);
-		void								buildChains_vect(std::vector<std::pair<int,int> > &pairs,
-											std::vector<int> &winners,
-											std::vector<int> &mainChain,
-											std::vector<int> &pend);
-		void								jacobsthalInsert_vect(std::vector<int> &mainChain,
-											std::vector<int> &pend,
-											std::vector<std::pair<int,int> > &pairs,
-											int leftovers, bool hasLeftovers);
+		void	mergeInsertSort_vect(std::vector<int>& vec, int pairLevel);
 
 		// Deque
-		std::deque<std::pair<int,int> >		makePairs_deq(std::deque<int> &deq, int &leftovers, bool &hasLeftovers);
-		std::deque<int>						mergeInsertSort_deq(std::deque<int> deq);
-		void								buildChains_deq(std::deque<std::pair<int,int> > &pairs,
-											std::deque<int> &winners,
-											std::deque<int> &mainChain,
-											std::deque<int> &pend);
-		void								jacobsthalInsert_deq(std::deque<int> &mainChain,
-											std::deque<int> &pend,
-											std::deque<std::pair<int,int> > &pairs,
-											int leftovers, bool hasLeftovers);
+		void	mergeInsertSort_deq(std::deque<int>& vec, int pairLevel);
+		void	sortChunks_deq(std::deque<int>& deq, int pairLevel);
+		// bool	countingComp_deq(std::deque<int>::iterator a, std::deque<int>::iterator b);
+		void	swapGroups_deq(std::deque<int>::iterator groupA, std::deque<int>::iterator groupB, int pairLevel);
+		void	buildChains_deq(std::deque<int>& deq, std::deque<std::deque<int>::iterator>& mainChain, std::deque<std::deque<int>::iterator>& pend, int numGroups, int pairLevel);
+		void	jacobsthalInsert_deq(std::deque<int>& vec, std::deque<std::deque<int>::iterator>& mainChain, std::deque<std::deque<int>::iterator>& pend, int pairLevel);
+		void 	reconstructSortedDeque(std::deque<int>& vec, std::deque<std::deque<int>::iterator>& mainChain, int pairLevel);
 
 
 	public:
