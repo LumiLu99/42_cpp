@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 17:29:56 by yelu              #+#    #+#             */
-/*   Updated: 2026/08/11 18:21:47 by yelu             ###   ########.fr       */
+/*   Updated: 2026/10/30 11:27:47 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	BitcoinExchange::loadDataFromCSV(const std::string &database)
 
 bool	BitcoinExchange::processInputFile(const std::string &filename)
 {
-	if (filename.find(".txt") == std::string::npos)
-		throw std::invalid_argument("Error: Only .txt file allowed");
+	if (filename.find(".csv") == std::string::npos)
+		throw std::invalid_argument("Error: Only .csv file allowed");
 	else
 	{
 		std::ifstream inputFile(filename.c_str());

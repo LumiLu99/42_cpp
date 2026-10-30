@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 16:26:50 by yelu              #+#    #+#             */
-/*   Updated: 2026/09/05 18:21:45 by yelu             ###   ########.fr       */
+/*   Updated: 2026/10/30 11:26:05 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ class PmergeMe
 
 		void				sortData();
 
-		// bool 						countingComp(std::vector<int>::iterator a, std::vector<int>::iterator b);
-		int									parsePositiveInteger(const std::string &argv);
+		// bool countingComp(std::vector<int>::iterator a, std::vector<int>::iterator b);
+		int		parsePositiveInteger(const std::string &argv);
 
 		// Vector
 		void	mergeInsertSort_vect(std::vector<int>& vec, int pairLevel);

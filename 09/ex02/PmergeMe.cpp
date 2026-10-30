@@ -6,7 +6,7 @@
 /*   By: yelu <yelu@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 16:26:53 by yelu              #+#    #+#             */
-/*   Updated: 2026/09/05 18:37:00 by yelu             ###   ########.fr       */
+/*   Updated: 2026/10/30 11:23:58 by yelu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ PmergeMe::PmergeMe(int argc, char**argv)
 		std::string token;
 		while (ss >> token)
 		{
-
 			int num = parsePositiveInteger(token);
 			if (std::find(_vector.begin(), _vector.end(), num) != _vector.end())
 				throw (std::invalid_argument("Error: Duplicate number detected"));
@@ -115,9 +114,9 @@ void PmergeMe::run()
 
 	std::cout << std::fixed << std::setprecision(5);
 	std::cout << "Time to process a range of " << _vector.size()
-	          << " elements with std::vector : " << _vectorTime << " us\n";
+			  << " elements with std::vector : " << _vectorTime << " us\n";
 	std::cout << "Time to process a range of " << _deque.size()
-	          << " elements with std::deque  : " << _dequeTime << " us\n";
+			  << " elements with std::deque  : " << _dequeTime << " us\n";
 
 	int limit = F(n);
 	std::cout << "Comparisons used: " << PmergeMe::_compCount << "\n";
@@ -176,6 +175,7 @@ static void sortChunks(std::vector<int>& vec, int pairLevel)
 
 static void buildChains(std::vector<int>& vec, 	std::vector<std::vector<int>::iterator>& mainChain, std::vector<std::vector<int>::iterator>& pend, int numGroups, int pairLevel)
 {
+	// std::cout << "\n=== Building chains now.. ===\n";
 	mainChain.push_back(vec.begin() + 1 * pairLevel - 1);
 	mainChain.push_back(vec.begin() + 2 * pairLevel - 1);
 	for (int i = 3; i <= numGroups; i++)
@@ -189,40 +189,43 @@ static void buildChains(std::vector<int>& vec, 	std::vector<std::vector<int>::it
 
 static void jacobsthalInsert(std::vector<int>& vec, std::vector<std::vector<int>::iterator>& mainChain, std::vector<std::vector<int>::iterator>& pend, int pairLevel)
 {
-		int numGroups = vec.size() / pairLevel;
-        int lastB = pend.size() + 1;
-        int prevJ = 1;
-        int currJ = 3;
+	// std::cout << "\n=== Jacobsthal insert pend now.. ===\n";
+	int numGroups = vec.size() / pairLevel;
+	int lastB = pend.size() + 1;
+	int prevJ = 1;
+	int currJ = 3;
 
-        while (prevJ < lastB)
-        {
-            int startB = std::min(currJ, lastB);
-            for (int b = startB; b > prevJ; --b)
-            {
-                 std::vector<int>::iterator itemToInsert = pend[b - 2];
+	while (prevJ < lastB)
+	{
+		int startB = std::min(currJ, lastB);
+		for (int b = startB; b > prevJ; --b)
+		{
+				std::vector<int>::iterator itemToInsert = pend[b - 2];
 
-                // Find where partner a_b currently sits in mainChain
-                std::vector<std::vector<int>::iterator>::iterator bound = mainChain.end();
-                int partnerChunk = 2 * b;
-                if (partnerChunk <= numGroups)
-                {
-                    std::vector<int>::iterator partnerLeader = vec.begin() + partnerChunk * pairLevel - 1;
-                    bound = std::find(mainChain.begin(), mainChain.end(), partnerLeader);
-                }
+			// Find where partner a_b currently sits in mainChain
+			std::vector<std::vector<int>::iterator>::iterator bound = mainChain.end();
+			int partnerChunk = 2 * b;
+			if (partnerChunk <= numGroups)
+			{
+				std::vector<int>::iterator partnerLeader = vec.begin() + partnerChunk * pairLevel - 1;
+				bound = std::find(mainChain.begin(), mainChain.end(), partnerLeader);
+			}
 
-                // Binary search in [begin, bound) and insert
-                std::vector<std::vector<int>::iterator>::iterator pos =
-                	std::upper_bound(mainChain.begin(), bound, itemToInsert, countingComp);
-                mainChain.insert(pos, itemToInsert);
-            }
-            int nextJ = currJ + 2 * prevJ;
-            prevJ = currJ;
-            currJ = nextJ;
-        }
+			// Binary search in [begin, bound) and insert
+			std::vector<std::vector<int>::iterator>::iterator pos =
+				std::upper_bound(mainChain.begin(), bound, itemToInsert, countingComp);
+			mainChain.insert(pos, itemToInsert);
+		}
+		int nextJ = currJ + 2 * prevJ;
+		prevJ = currJ;
+		currJ = nextJ;
+	}
+		
 }
 
 static void reconstructSortedVector(std::vector<int>& vec, std::vector<std::vector<int>::iterator>& mainChain, int pairLevel)
 {
+	// std::cout << "\n=== Reconstructing... ===\n";
 	std::vector<int> temp;
 	temp.reserve(vec.size());
 	for (size_t i = 0; i < mainChain.size(); i++)
@@ -274,58 +277,70 @@ void PmergeMe::mergeInsertSort_deq(std::deque<int>& deq, int pairLevel)
 void PmergeMe::buildChains_deq(std::deque<int>& deq, std::deque<std::deque<int>::iterator>& mainChain, std::deque<std::deque<int>::iterator>& pend, int numGroups, int pairLevel)
 {
 	mainChain.push_back(deq.begin() + 1 * pairLevel - 1);
+	// std::cout << "First mainChain push pair Level: " << pairLevel << " = " << *(deq.begin() + 1 * pairLevel - 1) << "\n";
 	mainChain.push_back(deq.begin() + 2 * pairLevel - 1);
+	// std::cout << "Second mainChain push pair Level: " << pairLevel << " = " << *(deq.begin() + 2 * pairLevel - 1) << "\n";
 	for (int i = 3; i <= numGroups; i++)
 	{
 		if (i % 2 == 1)
+		{
 			pend.push_back(deq.begin() + i * pairLevel - 1);
+			// std::cout << "Push back to pend chain at pair Level: " << pairLevel << " = " << *(deq.begin() + i * pairLevel - 1) << "\n";
+		}
 		else
+		{
 			mainChain.push_back(deq.begin() + i * pairLevel - 1);
+			// std::cout << "Push back to main chain at pair Level: " << pairLevel << " = " << *(deq.begin() + i * pairLevel - 1) << "\n";
+		}
 	}
 }
 
 void PmergeMe::jacobsthalInsert_deq(std::deque<int>& vec, std::deque<std::deque<int>::iterator>& mainChain, std::deque<std::deque<int>::iterator>& pend, int pairLevel)
 {
 		int numGroups = vec.size() / pairLevel;
-        int lastB = pend.size() + 1;
-        int prevJ = 1;
-        int currJ = 3;
+		int lastB = pend.size() + 1;
+		int prevJ = 1;
+		int currJ = 3;
 
-        while (prevJ < lastB)
-        {
-            int startB = std::min(currJ, lastB);
-            for (int b = startB; b > prevJ; --b)
-            {
-                 std::deque<int>::iterator itemToInsert = pend[b - 2];
+		while (prevJ < lastB)
+		{
+			int startB = std::min(currJ, lastB);
+			for (int b = startB; b > prevJ; --b)
+			{
+				 std::deque<int>::iterator itemToInsert = pend[b - 2];
+				//  std::cout << "Item to insert now: " << *itemToInsert << "\n";
 
-                // Find where partner a_b currently sits in mainChain
-                std::deque<std::deque<int>::iterator>::iterator bound = mainChain.end();
-                int partnerChunk = 2 * b;
-                if (partnerChunk <= numGroups)
-                {
-                    std::deque<int>::iterator partnerLeader = vec.begin() + partnerChunk * pairLevel - 1;
-                    bound = std::find(mainChain.begin(), mainChain.end(), partnerLeader);
-                }
+				// Find where partner a_b currently sits in mainChain
+				std::deque<std::deque<int>::iterator>::iterator bound = mainChain.end();
+				int partnerChunk = 2 * b;
+				if (partnerChunk <= numGroups)
+				{
+					std::deque<int>::iterator partnerLeader = vec.begin() + partnerChunk * pairLevel - 1;
+					bound = std::find(mainChain.begin(), mainChain.end(), partnerLeader);
+				}
 
-                // Binary search in [begin, bound) and insert
-                std::deque<std::deque<int>::iterator>::iterator pos =
-                	std::upper_bound(mainChain.begin(), bound, itemToInsert, countingComp_deq);
-                mainChain.insert(pos, itemToInsert);
-            }
-            int nextJ = currJ + 2 * prevJ;
-            prevJ = currJ;
-            currJ = nextJ;
-        }
+				// Binary search in [begin, bound) and insert
+				std::deque<std::deque<int>::iterator>::iterator pos =
+					std::upper_bound(mainChain.begin(), bound, itemToInsert, countingComp_deq);
+				mainChain.insert(pos, itemToInsert);
+			}
+			int nextJ = currJ + 2 * prevJ;
+			prevJ = currJ;
+			currJ = nextJ;
+		}
 }
 
 void PmergeMe::reconstructSortedDeque(std::deque<int>& vec, std::deque<std::deque<int>::iterator>& mainChain, int pairLevel)
 {
 	std::deque<int> temp;
+	// std::cout << "Size of mainChain at pairLevel " << pairLevel << " = " << mainChain.size() << "\n";
 	for (size_t i = 0; i < mainChain.size(); i++)
 	{
+		// std::cout << "i is now: " << i << "\n";
 		std::deque<int>::iterator chunkStart = mainChain[i] - (pairLevel - 1);
 		for (int j = 0; j < pairLevel; j++)
 		{
+			// std::cout << "J: " << j << " ==> Number: " << *(chunkStart + j) << "\n";
 			temp.push_back(*(chunkStart + j));
 		}
 	}
